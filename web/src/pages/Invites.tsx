@@ -33,9 +33,13 @@ function InvitesContent() {
     setSending(true);
     setMsg(null);
     try {
-      await api.createInvite(email.trim());
+      const invite = await api.createInvite(email.trim());
       setEmail("");
-      setMsg(`Convite enviado para ${email.trim()}.`);
+      setMsg(
+        invite.emailError
+          ? `Convite criado para ${email.trim()}, mas o e-mail não foi enviado (${invite.emailError}). Use "Reenviar" depois de corrigir a configuração de e-mail.`
+          : `Convite enviado para ${email.trim()}.`,
+      );
       await reload();
     } catch (e) {
       setMsg(e instanceof Error ? e.message : "Falha ao enviar convite.");
@@ -50,8 +54,9 @@ function InvitesContent() {
     try {
       const text = await file.text();
       const result = await api.bulkInvite(text);
+      const failureNote = result.emailFailures > 0 ? ` (${result.emailFailures} sem envio de e-mail — reenvie depois de corrigir a configuração)` : "";
       setMsg(
-        `${result.total} e-mails encontrados no arquivo — ${result.created} convites enviados, ${result.alreadyAccepted} já cadastrados.`,
+        `${result.total} e-mails encontrados no arquivo — ${result.created} convites criados${failureNote}, ${result.alreadyAccepted} já cadastrados.`,
       );
       await reload();
     } catch (e) {
@@ -63,8 +68,12 @@ function InvitesContent() {
   }
 
   async function resend(id: string) {
-    await api.resendInvite(id);
-    setMsg("Convite reenviado.");
+    try {
+      await api.resendInvite(id);
+      setMsg("Convite reenviado.");
+    } catch (e) {
+      setMsg(e instanceof Error ? e.message : "Falha ao reenviar convite.");
+    }
   }
 
   return (
@@ -86,7 +95,7 @@ function InvitesContent() {
             required
           />
           <button
-            className="bg-primary text-on-primary font-bold py-2 px-5 rounded-lg glow-button text-sm disabled:opacity-50"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-lg transition-colors text-sm disabled:opacity-50"
             type="submit"
             disabled={sending}
           >

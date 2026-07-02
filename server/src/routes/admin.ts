@@ -113,8 +113,19 @@ const emailSchema = z.string().trim().email();
 
 async function createAndSend(email: string) {
   const { invite, alreadyAccepted } = await upsertInvite(email);
-  if (!alreadyAccepted) await sendInviteEmail(invite.email, invite.token);
-  return { invite, alreadyAccepted };
+  let emailError: string | null = null;
+  if (!alreadyAccepted) {
+    try {
+      await sendInviteEmail(invite.email, invite.token);
+    } catch (err) {
+      // O convite já foi salvo — um erro de envio (ex. domínio não
+      // verificado no Resend) não deve derrubar a criação. Reenviar
+      // continua disponível depois de corrigir a configuração de e-mail.
+      emailError = (err as Error).message;
+      console.error(`[invites] falha ao enviar e-mail para ${email}:`, emailError);
+    }
+  }
+  return { invite, alreadyAccepted, emailError };
 }
 
 adminRouter.get(
@@ -133,12 +144,12 @@ adminRouter.post(
       res.status(400).json({ error: "E-mail inválido" });
       return;
     }
-    const { invite, alreadyAccepted } = await createAndSend(parsed.data);
+    const { invite, alreadyAccepted, emailError } = await createAndSend(parsed.data);
     if (alreadyAccepted) {
       res.status(409).json({ error: "Este e-mail já está cadastrado no bolão" });
       return;
     }
-    res.status(201).json(invite);
+    res.status(201).json({ ...invite, emailError });
   }),
 );
 
@@ -155,11 +166,14 @@ adminRouter.post(
     }
 
     const emails = parseEmailsFromCsv(parsed.data.csv);
-    const results = { created: 0, resent: 0, alreadyAccepted: 0, total: emails.length };
+    const results = { created: 0, resent: 0, alreadyAccepted: 0, emailFailures: 0, total: emails.length };
     for (const email of emails) {
-      const { alreadyAccepted } = await createAndSend(email);
+      const { alreadyAccepted, emailError } = await createAndSend(email);
       if (alreadyAccepted) results.alreadyAccepted++;
-      else results.created++;
+      else {
+        results.created++;
+        if (emailError) results.emailFailures++;
+      }
     }
     res.status(201).json(results);
   }),
@@ -177,7 +191,12 @@ adminRouter.post(
       res.status(409).json({ error: "Este convite já foi aceito" });
       return;
     }
-    await sendInviteEmail(invite.email, invite.token);
+    try {
+      await sendInviteEmail(invite.email, invite.token);
+    } catch (err) {
+      res.status(502).json({ error: `Falha ao enviar e-mail: ${(err as Error).message}` });
+      return;
+    }
     res.json({ ok: true });
   }),
 );

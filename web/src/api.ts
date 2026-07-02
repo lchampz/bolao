@@ -16,13 +16,18 @@ const API_BASE = resolveRenderHost(import.meta.env.VITE_API_URL ?? "");
 const ADMIN_TOKEN_KEY = "bolao.adminToken";
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  // "...init" antes de "headers": um spread de objeto substitui a chave
+  // inteira, não faz merge — se "headers" viesse depois de "...init" (que
+  // pode ter seu próprio headers, ex. Authorization vindo de adminRequest),
+  // o Content-Type sumia e o Express parava de fazer parse do body.
   const res = await fetch(`${API_BASE}/api${path}`, {
-    headers: { "Content-Type": "application/json" },
     ...init,
+    headers: { "Content-Type": "application/json", ...(init?.headers ?? {}) },
   });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    throw new Error(body.error ? JSON.stringify(body.error) : `Erro ${res.status}`);
+    const message = typeof body.error === "string" ? body.error : body.error ? JSON.stringify(body.error) : null;
+    throw new Error(message ?? `Erro ${res.status}`);
   }
   return res.json();
 }
@@ -89,11 +94,14 @@ export const api = {
 
   getInvites: () => adminRequest<Invite[]>("/admin/invites"),
   createInvite: (email: string) =>
-    adminRequest<Invite>("/admin/invites", { method: "POST", body: JSON.stringify({ email }) }),
-  bulkInvite: (csv: string) =>
-    adminRequest<{ created: number; resent: number; alreadyAccepted: number; total: number }>("/admin/invites/bulk", {
+    adminRequest<Invite & { emailError: string | null }>("/admin/invites", {
       method: "POST",
-      body: JSON.stringify({ csv }),
+      body: JSON.stringify({ email }),
     }),
+  bulkInvite: (csv: string) =>
+    adminRequest<{ created: number; resent: number; alreadyAccepted: number; emailFailures: number; total: number }>(
+      "/admin/invites/bulk",
+      { method: "POST", body: JSON.stringify({ csv }) },
+    ),
   resendInvite: (id: string) => adminRequest<{ ok: true }>(`/admin/invites/${id}/resend`, { method: "POST" }),
 };
