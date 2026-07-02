@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Copa AMM Points 2026 - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#00320d",
+                        "outline": "#879484",
+                        "on-tertiary-fixed": "#00174d",
+                        "on-secondary-fixed-variant": "#524700",
+                        "primary": "#65df76",
+                        "on-tertiary": "#042978",
+                        "on-primary-fixed": "#002107",
+                        "tertiary": "#b5c4ff",
+                        "secondary-fixed": "#ffe243",
+                        "on-secondary-container": "#716200",
+                        "inverse-on-surface": "#283044",
+                        "inverse-primary": "#006e27",
+                        "error-container": "#93000a",
+                        "on-secondary": "#393000",
+                        "on-primary-fixed-variant": "#00531c",
+                        "surface-container-low": "#131b2e",
+                        "on-surface-variant": "#bdcab9",
+                        "primary-fixed-dim": "#65df76",
+                        "on-tertiary-fixed-variant": "#25428f",
+                        "on-background": "#dae2fd",
+                        "surface-container": "#171f33",
+                        "secondary-fixed-dim": "#e3c600",
+                        "secondary-container": "#ffdf0a",
+                        "tertiary-fixed": "#dbe1ff",
+                        "primary-container": "#23a646",
+                        "surface-bright": "#31394d",
+                        "on-surface": "#dae2fd",
+                        "on-primary": "#003911",
+                        "surface-tint": "#65df76",
+                        "tertiary-fixed-dim": "#b5c4ff",
+                        "surface-variant": "#2d3449",
+                        "surface": "#0b1326",
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#fffbff",
+                        "outline-variant": "#3e4a3d",
+                        "primary-fixed": "#81fc90",
+                        "on-tertiary-container": "#00236c",
+                        "tertiary-container": "#748de0",
+                        "inverse-surface": "#dae2fd",
+                        "surface-container-high": "#222a3d",
+                        "on-secondary-fixed": "#211b00",
+                        "on-error": "#690005",
+                        "surface-dim": "#0b1326",
+                        "surface-container-lowest": "#060e20",
+                        "surface-container-highest": "#2d3449",
+                        "error": "#ffb4ab",
+                        "background": "#0b1326"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "margin-mobile": "16px",
+                        "container-max-width": "1440px",
+                        "gutter": "24px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Montserrat", "sans-serif"],
+                        "body-lg": ["\"Source Sans 3\"", "sans-serif"],
+                        "stats-xl": ["Montserrat", "sans-serif"],
+                        "label-md": ["JetBrains Mono", "monospace"],
+                        "body-md": ["\"Source Sans 3\"", "sans-serif"],
+                        "headline-lg": ["Montserrat", "sans-serif"],
+                        "display-lg-mobile": ["Montserrat", "sans-serif"],
+                        "display-lg": ["Montserrat", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "stats-xl": ["40px", { "lineHeight": "40px", "fontWeight": "900" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&amp;family=Source+Sans+3:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.15); }
+        .glow-green { box-shadow: 0 0 20px theme('colors.primary'); }
+        .glow-gold { box-shadow: 0 0 30px theme('colors.secondary-fixed'); }
+        .clip-hexagon { clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex overflow-x-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen py-8 px-4 fixed left-0 top-0 w-64 bg-surface/80 backdrop-blur-xl border-r border-white/15 shadow-2xl shadow-on-primary-container/20 z-50">
+<div class="mb-10 text-center">
+<div class="w-20 h-20 mx-auto bg-surface-container rounded-full flex items-center justify-center border-2 border-primary mb-4 glow-green">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+</div>
+<h1 class="font-display-lg text-headline-md text-primary tracking-tighter">Copa AMM</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Points 2026</p>
+</div>
+<ul class="flex-1 space-y-2">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors duration-200 scale-95 active:scale-90 text-on-primary-container bg-primary-container font-bold" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors duration-200 scale-95 active:scale-90 text-on-surface-variant hover:text-on-surface hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">sports_soccer</span>
+<span class="font-body-md text-body-md">Meus Palpites</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors duration-200 scale-95 active:scale-90 text-on-surface-variant hover:text-on-surface hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-body-md text-body-md">Ranking</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors duration-200 scale-95 active:scale-90 text-on-surface-variant hover:text-on-surface hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-body-md text-body-md">Departamentos</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors duration-200 scale-95 active:scale-90 text-on-surface-variant hover:text-on-surface hover:bg-white/10" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Administracao</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto">
+<button class="w-full py-3 mb-6 bg-primary text-on-primary font-headline-md text-body-md rounded-xl hover:shadow-[0_0_15px_theme('colors.primary')] transition-shadow font-bold">
+                Novo Palpite
+            </button>
+<ul class="space-y-2 border-t border-white/10 pt-4">
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-white/10 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+<span class="font-body-md text-sm">Suporte</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-error hover:text-error-container hover:bg-white/10 rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">logout</span>
+<span class="font-body-md text-sm">Sair</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 ml-0 md:ml-64 p-margin-mobile md:p-gutter max-w-container-max-width w-full relative">
+<!-- TopNavBar (Mobile only for this layout) -->
+<header class="md:hidden flex items-center justify-between bg-transparent w-full h-20 mb-4 bg-gradient-to-b from-surface to-transparent">
+<h1 class="font-display-lg-mobile text-headline-lg-mobile text-primary tracking-tighter">Copa AMM</h1>
+<div class="flex gap-4">
+<button class="text-on-surface-variant opacity-80 hover:opacity-100 hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant opacity-80 hover:opacity-100 hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- TopNavBar (Desktop - Absolute positioning as requested by JSON structure despite SideNav presence) -->
+<div class="hidden md:flex absolute top-0 right-0 w-[calc(100%-16rem)] h-20 items-center justify-end px-8 z-40 pointer-events-none">
+<div class="flex gap-6 pointer-events-auto">
+<button class="text-on-surface-variant opacity-80 hover:opacity-100 hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant opacity-80 hover:opacity-100 hover:text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mt-16 md:mt-10">
+<!-- Hero Section -->
+<section class="col-span-1 md:col-span-12 glass-panel rounded-3xl p-8 relative overflow-hidden flex flex-col md:flex-row items-center justify-between border-t border-l border-white/20">
+<!-- Atmospheric glow -->
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute -bottom-24 -right-24 w-96 h-96 bg-tertiary/20 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="z-10 text-center md:text-left mb-8 md:mb-0">
+<span class="inline-block px-4 py-1 rounded-full bg-secondary-fixed/20 text-secondary-fixed border border-secondary-fixed/50 font-label-md text-label-md mb-4 uppercase tracking-widest">
+                        Oitavas de Final
+                    </span>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2 shadow-black/50 drop-shadow-lg">
+                        Copa AMM Points 2026
+                    </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6 max-w-lg">
+                        Prepare seus palpites. A gloria corporativa aguarda.
+                    </p>
+<div class="flex items-center gap-4 bg-surface-container-high/80 rounded-xl p-4 w-fit mx-auto md:mx-0 border border-white/10">
+<span class="material-symbols-outlined text-tertiary text-3xl">timer</span>
+<div class="font-stats-xl text-stats-xl text-white font-mono tabular-nums tracking-widest">
+                            02:14:45
+                        </div>
+</div>
+</div>
+<div class="z-10 relative">
+<!-- Trophy Image Placeholder -->
+<div class="w-48 h-48 md:w-64 md:h-64 rounded-full bg-surface-container flex items-center justify-center glow-gold relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-tr from-secondary-container/20 to-transparent"></div>
+<img alt="Trophy" class="object-cover w-full h-full opacity-90 mix-blend-screen" data-alt="A highly detailed, glowing golden football trophy cup, rendered in 3D with dramatic studio lighting. The trophy is metallic, polished, and catches highlights from a deep neon stadium background. High-contrast athletic aesthetic, premium sports event feel, glowing particle effects surrounding the gold." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxQDFGElKdoRwljtMvBhzCL5cK8JZaN9d0nNUyfWgvu-M-Kplm3kwLUauWEb32-FUgxUqhmP5JhtPitX51HhcAxaqMrfZ1wt6LdlGs09QopLDnQp6Vc0__oWyARadDDZrLr_Y2y_rx2n70bzgsFkZeP0zIBWsLX5czmxwBKGnQ-HmUJqJKc4oZCfawvFFeHTGn4YNDpyjvlMJQDeEAdcDLVJ-yMhkBO9ZhrObGgo5yRfmXWW4vQEJ5TeC4VwnbrHRQ0sHupX9NdSg"/>
+</div>
+</div>
+</section>
+<!-- Meus Palpites & Ranking Column -->
+<div class="col-span-1 md:col-span-8 flex flex-col gap-gutter">
+<!-- Meus Palpites -->
+<section class="glass-panel rounded-2xl p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">sports_soccer</span>
+                            Meus Palpites
+                        </h3>
+<a class="font-label-md text-label-md text-primary hover:text-primary-fixed transition-colors" href="#">Ver todos</a>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+<!-- Match Card 1 -->
+<div class="bg-surface-container/50 border border-white/10 rounded-xl p-5 hover:bg-surface-container transition-colors relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-secondary-fixed text-on-secondary-fixed font-label-md text-[10px] px-2 py-1 rounded-bl-lg font-bold uppercase">Ao Vivo</div>
+<div class="text-center font-label-md text-label-md text-on-surface-variant mb-4">Hoje, 16:00</div>
+<div class="flex items-center justify-between mb-6">
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white/20">
+<img class="w-full h-full object-cover" data-alt="A glossy, stylized circular flag of Brazil, rendered with slight 3D extrusion and dynamic lighting. The green, yellow, and blue colors are vibrant and saturated. Dark stadium background context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjH_VYJaWXCNl_FyBU3nJHAtzp0pjNidSDOFeGvB_gQ2c7aYUn28Ln7pty94vCj80XguvKvSy6hQxNAwWQ6Q_UKMeon5IBKSH67wBQv729SUkJdZPqJh0HGDq1PiiBR2y5Yjl0_p54TYLflpLdE9CrOQ28z6II3yS-Y60m33_y3SeXKAOzePRS2d1rMjPZVQ1AFO0F2cuFcCcZy_xs7JytGVtlcdauhBoZpVpreZhlGacfE5rCm0PbTaDRdyRV5CXHr7L6zNyDkxY"/>
+</div>
+<span class="font-headline-md text-body-md text-on-surface font-bold">BRA</span>
+</div>
+<div class="flex items-center gap-4">
+<input class="w-14 h-14 bg-surface-container-high border border-white/20 rounded-lg text-center font-stats-xl text-headline-lg text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none" type="number" value="2"/>
+<span class="text-on-surface-variant font-bold text-xl">X</span>
+<input class="w-14 h-14 bg-surface-container-high border border-white/20 rounded-lg text-center font-stats-xl text-headline-lg text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none" type="number" value="1"/>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white/20">
+<img class="w-full h-full object-cover" data-alt="A glossy, stylized circular flag of France, rendered with slight 3D extrusion and dynamic lighting. The blue, white, and red colors are vibrant and saturated. Dark stadium background context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1x_swPhdSwHb4BNvdEdJ_0VlXUqxVh7aU3PUu8OXdfE5cHtL1gWKYyAnY8109rycnlrhS1motzFI3QPDsPveyqc5ubXLJj9B5Wp5_yRzUY4ts707Oyo9pcclqo0QvH_iBibec-wGJ3NU_O6ZkQSJaDGG6TtuVidLWqjSgKdEsgAQ7Qn3wIpygXzSorq-_NHxCQCaPFN92hipLVW7v12xIiSMMGgtf25a6AOIG8tK4cajfWBKOurVnVpqU6iPAqQr0acVpcCkbbxA"/>
+</div>
+<span class="font-headline-md text-body-md text-on-surface font-bold">FRA</span>
+</div>
+</div>
+<button class="w-full py-2 bg-primary/20 text-primary border border-primary/50 hover:bg-primary hover:text-on-primary rounded-lg font-label-md text-label-md transition-all font-bold">
+                                Salvar Palpite
+                            </button>
+</div>
+<!-- Match Card 2 -->
+<div class="bg-surface-container/50 border border-white/10 rounded-xl p-5 hover:bg-surface-container transition-colors opacity-75 grayscale-[20%]">
+<div class="text-center font-label-md text-label-md text-on-surface-variant mb-4">Amanha, 13:00</div>
+<div class="flex items-center justify-between mb-6">
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 bg-surface-variant"></div>
+<span class="font-headline-md text-body-md text-on-surface font-bold">ARG</span>
+</div>
+<div class="flex items-center gap-4">
+<input class="w-14 h-14 bg-surface-container-high border border-white/20 rounded-lg text-center font-stats-xl text-headline-lg text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="-" type="number"/>
+<span class="text-on-surface-variant font-bold text-xl">X</span>
+<input class="w-14 h-14 bg-surface-container-high border border-white/20 rounded-lg text-center font-stats-xl text-headline-lg text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="-" type="number"/>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 bg-surface-variant"></div>
+<span class="font-headline-md text-body-md text-on-surface font-bold">ESP</span>
+</div>
+</div>
+<button class="w-full py-2 bg-transparent text-white border border-white/20 hover:bg-white/10 rounded-lg font-label-md text-label-md transition-all">
+                                Fazer Palpite
+                            </button>
+</div>
+</div>
+</section>
+<!-- Global Ranking -->
+<section class="glass-panel rounded-2xl p-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-tertiary-container/10 rounded-full blur-[80px] pointer-events-none"></div>
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2 mb-8">
+<span class="material-symbols-outlined text-secondary-fixed">leaderboard</span>
+                        Top Ranking Global
+                    </h3>
+<!-- Podium -->
+<div class="flex items-end justify-center h-48 gap-2 md:gap-4 px-4 pb-4">
+<!-- 2nd Place -->
+<div class="flex flex-col items-center w-1/3 z-10 relative">
+<div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-surface-variant border-2 border-[#C0C0C0] mb-2 overflow-hidden shadow-[0_0_15px_rgba(192,192,192,0.3)]">
+<img class="w-full h-full object-cover" data-alt="A stylized portrait avatar of a young corporate professional man named Bruno, rendered in a sleek 3D illustration style suitable for a modern gaming UI. Moody lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdx0ujmq8pz4FxkJB2TaFEbJgNAZVt1DwQtkAQ2ApYWRHkHLGE9SWqtlbH6fjVjNARYnoJDmyFMWV7HNHU5_tJdavf5Lwv-FnVLVWlbhlZsLyxTyYJQLxi95Epe5i3cL2d0QSx-eIdU1TPHBkY2bdBPttDrU3D262ZIq2_pSuudzsjV_foBQ60mNf9ennndBCoxtYATVjgYnFhl2nL3LCtj6911ns774bZxp5uuXA1f1B7bAyWKCF1sX69544aGl0FSUzy2Z1tIjo"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-bold truncate w-full text-center">Bruno Costa</span>
+<span class="font-label-md text-[12px] text-on-surface-variant">450 pts</span>
+<div class="w-full h-24 bg-gradient-to-t from-surface-container-highest to-surface-container border-t border-[#C0C0C0]/50 rounded-t-lg mt-2 flex justify-center pt-2">
+<span class="font-stats-xl text-headline-md text-[#C0C0C0]">2</span>
+</div>
+</div>
+<!-- 1st Place -->
+<div class="flex flex-col items-center w-1/3 z-20 relative -translate-y-4">
+<span class="material-symbols-outlined text-secondary-fixed text-3xl absolute -top-10 drop-shadow-[0_0_10px_theme('colors.secondary-fixed')] animate-pulse" style="font-variation-settings: 'FILL' 1;">crown</span>
+<div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-surface-variant border-4 border-secondary-fixed mb-2 overflow-hidden shadow-[0_0_20px_theme('colors.secondary-fixed')] relative">
+<img class="w-full h-full object-cover" data-alt="A stylized portrait avatar of a young corporate professional woman named Ana, rendered in a sleek 3D illustration style suitable for a modern gaming UI. Moody lighting, high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPetR-IwyrY2sDyMLdoHQwSskZHmOnzg1N_7BkceBTPQfLqz7QhOVVxOZk6DfLVzF5s1x67L78Is8S4XXV9FogttuOSR6-QyuRiw724Q9_4Z_Z44v0dyh_B2vKidPuBYbQOGZKYQIke6UJQ6Rtzb1QJ9Iu9PhqGIAR22eAruKvQw7cIU8X_jmsCg4JXeBZhR6CzNjzItm6wjumsnhXtTp00RDLUBte8jmtN1v0A6WCGUjjBbPeoiDFSaaixv5d1taH7OcgTwEzTrk"/>
+<div class="absolute inset-0 border-2 border-white/20 rounded-full"></div>
+</div>
+<span class="font-headline-md text-body-md text-on-surface font-bold truncate w-full text-center">Ana Silva</span>
+<span class="font-label-md text-[14px] text-secondary-fixed font-bold">520 pts</span>
+<div class="w-full h-32 bg-gradient-to-t from-secondary-fixed/20 to-surface-container border-t border-secondary-fixed/50 rounded-t-lg mt-2 flex justify-center pt-2 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-secondary-fixed/10 to-transparent"></div>
+<span class="font-stats-xl text-headline-lg text-secondary-fixed drop-shadow-md">1</span>
+</div>
+</div>
+<!-- 3rd Place -->
+<div class="flex flex-col items-center w-1/3 z-10 relative">
+<div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-surface-variant border-2 border-[#CD7F32] mb-2 overflow-hidden shadow-[0_0_15px_rgba(205,127,50,0.3)]">
+<img class="w-full h-full object-cover" data-alt="A stylized portrait avatar of a young corporate professional woman named Carla, rendered in a sleek 3D illustration style suitable for a modern gaming UI. Moody lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0Mzd0fk0qGBldEiqnRfaC7t-Pb1WDkZ1g8a8dwAYMDk_Z4h9iOKWWJjhbGAr4Du83zt-jDRabg0-NhAAdB8H1lJ_Z0qtOyN-kIHJRbppYcUca_S5kwjeS2I4GFTOCg3RT7e2qf5bsatSh2wH4rUwhYACnUFxO8CWM8LSJr3jOabPpgMjMIKOetsi5E5V1zX2tPeoso-w0fw0y3G_xG4LEyClESvuqt56zjMdp-Q0hBJUHaRPTilnpuvMRlFOKF-STvtFvG9JR2Pg"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-bold truncate w-full text-center">Carla Dias</span>
+<span class="font-label-md text-[12px] text-on-surface-variant">410 pts</span>
+<div class="w-full h-20 bg-gradient-to-t from-surface-container-highest to-surface-container border-t border-[#CD7F32]/50 rounded-t-lg mt-2 flex justify-center pt-2">
+<span class="font-stats-xl text-headline-md text-[#CD7F32]">3</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Sidebar (Conquistas & Departamentos) Column -->
+<div class="col-span-1 md:col-span-4 flex flex-col gap-gutter">
+<!-- Conquistas -->
+<aside class="glass-panel rounded-2xl p-6">
+<h3 class="font-headline-md text-body-lg text-on-surface flex items-center gap-2 mb-4 font-bold">
+<span class="material-symbols-outlined text-tertiary-container">workspace_premium</span>
+                        Conquistas
+                    </h3>
+<div class="flex flex-wrap gap-4 justify-center">
+<!-- Badge 1 -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-16 h-16 bg-surface-container-high clip-hexagon flex items-center justify-center border border-white/20 group-hover:bg-tertiary-container/20 transition-all duration-300 relative">
+<span class="material-symbols-outlined text-tertiary-container text-2xl group-hover:scale-110 transition-transform">alarm</span>
+<div class="absolute inset-0 bg-tertiary-container/10 mix-blend-overlay"></div>
+</div>
+<span class="font-label-md text-[10px] text-on-surface-variant text-center leading-tight">Madrugador</span>
+</div>
+<!-- Badge 2 -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-16 h-16 bg-surface-container-high clip-hexagon flex items-center justify-center border border-secondary-fixed/30 shadow-[0_0_10px_theme('colors.secondary-fixed')/20] group-hover:bg-secondary-fixed/20 transition-all duration-300">
+<span class="material-symbols-outlined text-secondary-fixed text-2xl group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+</div>
+<span class="font-label-md text-[10px] text-on-surface-variant text-center leading-tight">Artilheiro</span>
+</div>
+<!-- Badge 3 -->
+<div class="flex flex-col items-center gap-2 group cursor-pointer">
+<div class="w-16 h-16 bg-surface-container-high clip-hexagon flex items-center justify-center border border-primary/30 shadow-[0_0_10px_theme('colors.primary')/20] group-hover:bg-primary/20 transition-all duration-300">
+<span class="material-symbols-outlined text-primary text-2xl group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<span class="font-label-md text-[10px] text-on-surface-variant text-center leading-tight">Invicto</span>
+</div>
+</div>
+</aside>
+<!-- Departamentos -->
+<aside class="glass-panel rounded-2xl p-6 flex-1">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-body-lg text-on-surface flex items-center gap-2 font-bold">
+<span class="material-symbols-outlined text-outline">corporate_fare</span>
+                            Departamentos
+                        </h3>
+</div>
+<div class="space-y-6">
+<!-- Dept 1 -->
+<div>
+<div class="flex justify-between items-center mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface">TI</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[16px]" style="font-variation-settings: 'FILL' 1;">crown</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">2.1k pts</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-on-tertiary-container to-primary w-[85%] rounded-full shadow-[0_0_10px_theme('colors.primary')]"></div>
+</div>
+</div>
+<!-- Dept 2 -->
+<div>
+<div class="flex justify-between items-center mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface">Financeiro</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">1.8k pts</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-surface-variant w-[70%] rounded-full"></div>
+</div>
+</div>
+<!-- Dept 3 -->
+<div>
+<div class="flex justify-between items-center mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-on-surface">RH</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">1.5k pts</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-surface-variant w-[55%] rounded-full"></div>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 text-on-surface-variant font-label-md text-label-md border border-white/10 rounded-lg hover:bg-white/5 transition-colors">
+                        Ver Ranking Completo
+                    </button>
+</aside>
+</div>
+</div>
+</main>
+</body></html>

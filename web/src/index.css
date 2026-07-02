@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Classes customizadas portadas literalmente de docs/layout/*.html (Stitch) */
+
+body {
+  background-color: theme("colors.background");
+  color: theme("colors.on-background");
+  background-image: radial-gradient(circle at top right, rgba(101, 223, 118, 0.05), transparent 40%),
+    radial-gradient(circle at bottom left, rgba(35, 166, 70, 0.05), transparent 40%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.glass-card-floating {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px -10px rgba(6, 14, 32, 0.8);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+.glass-card-floating:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px -15px rgba(101, 223, 118, 0.2);
+}
+
+.glow-green {
+  box-shadow: 0 0 20px theme("colors.primary");
+}
+
+.glow-gold {
+  box-shadow: 0 0 30px theme("colors.secondary-fixed");
+}
+
+.glow-button {
+  box-shadow: 0 0 15px rgba(101, 223, 118, 0.3);
+  transition: all 0.3s ease;
+}
+
+.glow-button:hover {
+  box-shadow: 0 0 25px rgba(101, 223, 118, 0.6);
+  transform: scale(1.02);
+}
+
+.clip-hexagon {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.podium-1 {
+  background: linear-gradient(180deg, #ffd700 0%, rgba(255, 215, 0, 0.2) 100%);
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+}
+.podium-2 {
+  background: linear-gradient(180deg, #c0c0c0 0%, rgba(192, 192, 192, 0.2) 100%);
+  box-shadow: 0 0 30px rgba(192, 192, 192, 0.2);
+}
+.podium-3 {
+  background: linear-gradient(180deg, #cd7f32 0%, rgba(205, 127, 50, 0.2) 100%);
+  box-shadow: 0 0 20px rgba(205, 127, 50, 0.2);
+}
+
+.avatar-glow-1 {
+  box-shadow: 0 0 20px #ffd700;
+  border: 3px solid #ffd700;
+}
+.avatar-glow-2 {
+  box-shadow: 0 0 20px #c0c0c0;
+  border: 3px solid #c0c0c0;
+}
+.avatar-glow-3 {
+  box-shadow: 0 0 20px #cd7f32;
+  border: 3px solid #cd7f32;
+}
+
+.score-input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  text-align: center;
+}
+
+.score-input:focus {
+  outline: none;
+  border-color: #65df76;
+  box-shadow: 0 0 10px rgba(101, 223, 118, 0.2);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.score-input::-webkit-outer-spin-button,
+.score-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.score-input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.stadium-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, rgba(101, 223, 118, 0.15) 0%, transparent 60%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.progress-circle {
+  transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.icon-filled {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}

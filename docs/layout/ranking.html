@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Copa AMM Points 2026 - Ranking Global</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&amp;family=Source+Sans+3:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ffb4ab",
+                      "surface-container-high": "#222a3d",
+                      "on-tertiary-fixed-variant": "#25428f",
+                      "secondary-fixed": "#ffe243",
+                      "tertiary": "#b5c4ff",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#b5c4ff",
+                      "outline-variant": "#3e4a3d",
+                      "surface": "#0b1326",
+                      "inverse-primary": "#006e27",
+                      "tertiary-fixed": "#dbe1ff",
+                      "primary": "#65df76",
+                      "secondary": "#fffbff",
+                      "surface-dim": "#0b1326",
+                      "on-tertiary": "#042978",
+                      "surface-container-highest": "#2d3449",
+                      "on-secondary-fixed-variant": "#524700",
+                      "primary-container": "#23a646",
+                      "tertiary-container": "#748de0",
+                      "inverse-surface": "#dae2fd",
+                      "secondary-container": "#ffdf0a",
+                      "primary-fixed": "#81fc90",
+                      "on-secondary-fixed": "#211b00",
+                      "surface-bright": "#31394d",
+                      "on-primary": "#003911",
+                      "surface-container": "#171f33",
+                      "on-tertiary-fixed": "#00174d",
+                      "outline": "#879484",
+                      "surface-variant": "#2d3449",
+                      "on-surface": "#dae2fd",
+                      "on-primary-fixed-variant": "#00531c",
+                      "surface-tint": "#65df76",
+                      "on-secondary-container": "#716200",
+                      "on-primary-container": "#00320d",
+                      "on-error": "#690005",
+                      "error-container": "#93000a",
+                      "background": "#0b1326",
+                      "surface-container-lowest": "#060e20",
+                      "primary-fixed-dim": "#65df76",
+                      "on-surface-variant": "#bdcab9",
+                      "on-tertiary-container": "#00236c",
+                      "secondary-fixed-dim": "#e3c600",
+                      "on-primary-fixed": "#002107",
+                      "on-secondary": "#393000",
+                      "surface-container-low": "#131b2e",
+                      "inverse-on-surface": "#283044",
+                      "on-background": "#dae2fd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "base": "4px",
+                      "container-max-width": "1440px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "48px"
+              },
+              "fontFamily": {
+                      "stats-xl": [
+                              "Montserrat"
+                      ],
+                      "headline-lg": [
+                              "Montserrat"
+                      ],
+                      "display-lg-mobile": [
+                              "Montserrat"
+                      ],
+                      "headline-md": [
+                              "Montserrat"
+                      ],
+                      "display-lg": [
+                              "Montserrat"
+                      ],
+                      "body-md": [
+                              "\"Source Sans 3\""
+                      ],
+                      "label-md": [
+                              "JetBrains Mono"
+                      ],
+                      "body-lg": [
+                              "\"Source Sans 3\""
+                      ]
+              },
+              "fontSize": {
+                      "stats-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      }
+              }
+            },
+          }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .podium-1 {
+            background: linear-gradient(180deg, #FFD700 0%, rgba(255, 215, 0, 0.2) 100%);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+        }
+        .podium-2 {
+            background: linear-gradient(180deg, #C0C0C0 0%, rgba(192, 192, 192, 0.2) 100%);
+            box-shadow: 0 0 30px rgba(192, 192, 192, 0.2);
+        }
+        .podium-3 {
+            background: linear-gradient(180deg, #CD7F32 0%, rgba(205, 127, 50, 0.2) 100%);
+            box-shadow: 0 0 20px rgba(205, 127, 50, 0.2);
+        }
+
+        .avatar-glow-1 { box-shadow: 0 0 20px #FFD700; border: 3px solid #FFD700; }
+        .avatar-glow-2 { box-shadow: 0 0 20px #C0C0C0; border: 3px solid #C0C0C0; }
+        .avatar-glow-3 { box-shadow: 0 0 20px #CD7F32; border: 3px solid #CD7F32; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex overflow-x-hidden">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen w-64 z-50 bg-surface-container-low/80 backdrop-blur-2xl border-r border-white/5 shadow-2xl hidden md:flex flex-col py-6 gap-2">
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
+<img alt="Copa AMM Logo" class="w-10 h-10 rounded-full" data-alt="A stylized logo for Copa AMM 2026, featuring energetic green and dynamic sports elements, corporate design style, high contrast, clean vector art style, dark atmospheric background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVUFxDzjoggNR_p-360nFfqXgcY1leS_7BMn5ogG9KWeWTZR8QHC52kSe1_ASgW4ilceipxHFFgTbjhqak1MSqtQwgzOTfF1RV3saRg9BulYlzAzP5-H2lSFkN5v9H9kDHNXn7-uu2DlK_Rnj4Fw4n6_VrwtIfltOKcXKp9S64f7uIY8o9oNAo0XAciTZ7IMXyKg5DQrzh036D2maLPCh_zchVyw1pC3TT_e_0g5zKs4v0U8AcLCYJB1D3iy_jMwM2blHdebIUi_w"/>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-black text-primary">Copa AMM 2026</h1>
+<p class="text-on-surface-variant font-label-md">Arena Dynamic League</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto w-full">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-secondary px-4 py-3 mx-2 hover:bg-white/10 rounded-xl transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-200">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-secondary px-4 py-3 mx-2 hover:bg-white/10 rounded-xl transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-200">sports_soccer</span>
+                Meus Palpites
+            </a>
+<a class="flex items-center gap-3 bg-primary text-on-primary rounded-xl px-4 py-3 mx-2 shadow-[0_0_15px_rgba(101,223,118,0.3)]" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+                Ranking
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-secondary px-4 py-3 mx-2 hover:bg-white/10 rounded-xl transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-200">corporate_fare</span>
+                Departamentos
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-secondary px-4 py-3 mx-2 hover:bg-white/10 rounded-xl transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:translate-x-1 duration-200">admin_panel_settings</span>
+                Administracao
+            </a>
+</div>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary text-on-primary font-bold py-3 rounded-xl hover:shadow-[0_0_15px_rgba(101,223,118,0.5)] transition-shadow">
+                Place Prediction
+            </button>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-40 bg-surface/10 backdrop-blur-xl border-b border-white/10 shadow-md md:w-[calc(100%-16rem)]">
+<div class="flex justify-between items-center px-gutter h-16 w-full">
+<div class="font-headline-md text-headline-md font-black text-primary italic tracking-tighter">
+                    Copa AMM Points 2026
+                </div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-white/5 transition-colors p-2 rounded-full cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-white/5 transition-colors p-2 rounded-full cursor-pointer active:scale-95 transition-transform">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 mt-16 p-margin-mobile md:p-gutter max-w-container-max-width mx-auto w-full flex flex-col gap-8">
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Left Column (Podium & Leaderboard) -->
+<div class="flex-1 flex flex-col gap-8">
+<!-- Podium Section -->
+<section class="glass-card rounded-xl p-8 relative overflow-hidden flex flex-col items-center justify-end min-h-[400px]">
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none"></div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-center mb-auto pt-4 relative z-10 text-white">Ranking Global</h2>
+<div class="flex items-end justify-center gap-2 sm:gap-6 mt-12 w-full max-w-2xl relative z-10">
+<!-- 2nd Place -->
+<div class="flex flex-col items-center w-1/3">
+<div class="relative mb-4">
+<img alt="Bruno Costa" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover avatar-glow-2" data-alt="A professional headshot of a corporate employee smiling, bright lighting, highly detailed, realistic, energetic sports aesthetic backdrop, vibrant colors, shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc2hnjoSgIF9-N5l09tFVxh-lKkJrV1fwsFi3Ea3ku_LhXx8AQZc9-M45Fg6cB5Se-sNS1nKWnNdtpf1bMy7qKj9dN9PrTSjdU6aseXl4WeUG7YxsEhTYHGMk_Q_uxLv--drRISr406KwrU0Gekm6A6Qcn5JZWmFNTKM_Ddu14RMZZmN8mmGJ3wCjkb9oOiWN024S8q7Tg5HDUkGMTNU-IUJGeS1zJ8tyhp4SXQ-0C8cHciQg8DfDLG9uH4QiTC-_lOJ_lsf1TfVA"/>
+<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#C0C0C0] text-[#000] font-bold text-xs px-2 py-1 rounded-full border border-black/20 shadow-md">2nd</div>
+</div>
+<div class="text-center mb-4">
+<div class="font-bold text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-[100px]">Bruno Costa</div>
+<div class="text-secondary-fixed text-sm font-bold">14,200 pts</div>
+</div>
+<div class="w-full podium-2 rounded-t-xl h-24 sm:h-32 flex justify-center items-start pt-4 border-t border-[#C0C0C0]/50">
+<span class="material-symbols-outlined text-[#C0C0C0] text-4xl" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+</div>
+</div>
+<!-- 1st Place -->
+<div class="flex flex-col items-center w-1/3 -mt-12 z-10">
+<div class="relative mb-4">
+<img alt="Ana Silva" class="w-20 h-20 sm:w-28 sm:h-28 rounded-full object-cover avatar-glow-1" data-alt="A professional headshot of a female corporate employee smiling broadly, bright lighting, highly detailed, realistic, energetic sports aesthetic backdrop with golden hues, vibrant colors, shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3IJky3fjmt_oIUFRes0k1myX04m4TIZCckYqF_P3OC5KuME7h3zwlI9YRdPZQVy351DlKMc3lb3FO4-uih6SV37Qu11Ur_vBvKTcQsfQhw9spPLWes_fe-fwOuuLaOtia7QPYbTr1scgYOzsgFuP29y4cYswKGgsA6uliiHSiKjww0THoul89g6xCVQNDbnw0ahltupA_1uElY9fRx1sxvz1Mal2XVI5zH4CyMd_7Y2sSUtDSDsBHKyXAJ8cLp9uvjyfaT2ViXUY"/>
+<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#FFD700] text-[#000] font-bold text-sm px-3 py-1 rounded-full border border-black/20 shadow-lg">1st</div>
+</div>
+<div class="text-center mb-4">
+<div class="font-bold text-white text-lg whitespace-nowrap">Ana Silva</div>
+<div class="text-secondary-fixed text-base font-bold">15,850 pts</div>
+</div>
+<div class="w-full podium-1 rounded-t-xl h-36 sm:h-48 flex justify-center items-start pt-4 border-t border-[#FFD700]/70">
+<span class="material-symbols-outlined text-[#FFD700] text-5xl" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+</div>
+</div>
+<!-- 3rd Place -->
+<div class="flex flex-col items-center w-1/3">
+<div class="relative mb-4">
+<img alt="Camila Rocha" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover avatar-glow-3" data-alt="A professional headshot of a female corporate employee, warm smile, bright lighting, highly detailed, realistic, energetic sports aesthetic backdrop with bronze hints, vibrant colors, shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1we-EZdkLT_I9wV9OjO4rUEK44RyVkJjvdJy8qGQg0R2rALhaKZSDNFsUD6N4tqzWlTq_um4ZI0kUY2PTD7D8n_j2gc_gV45VLRBXvBkP1OaWZ_Wx9rfTPFgfsAye8NAkMd3CWlfYJqDz5AIeUfiO-IGUmsD7hE8v6s25BROnEWaAhJrJ2xrm-roloo3dttCgRXVRaR6O5NC5Jq6hfUPamxrTjmBjP14rVFkjGgRuYmA5paS2a1XiOgLJlkdwZVAJbucWj3v5apw"/>
+<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#CD7F32] text-[#fff] font-bold text-xs px-2 py-1 rounded-full border border-black/20 shadow-md">3rd</div>
+</div>
+<div class="text-center mb-4">
+<div class="font-bold text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-[100px]">Camila Rocha</div>
+<div class="text-secondary-fixed text-sm font-bold">13,900 pts</div>
+</div>
+<div class="w-full podium-3 rounded-t-xl h-20 sm:h-24 flex justify-center items-start pt-4 border-t border-[#CD7F32]/50">
+<span class="material-symbols-outlined text-[#CD7F32] text-4xl" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Leaderboard Table -->
+<section class="glass-card rounded-xl overflow-hidden flex flex-col">
+<div class="p-6 border-b border-white/10 flex justify-between items-center bg-surface-container/50">
+<h3 class="font-headline-md text-headline-md font-bold text-white">Classificação Geral</h3>
+<button class="text-sm font-bold text-primary hover:text-primary-fixed transition-colors flex items-center gap-1">
+                                Ver Regras <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="bg-surface-container-highest/30 text-on-surface-variant font-label-md border-b border-white/5 uppercase tracking-wider text-xs">
+<th class="p-4 w-16 text-center">Pos</th>
+<th class="p-4">Participante</th>
+<th class="p-4">Depto</th>
+<th class="p-4 text-center">Placar Exato</th>
+<th class="p-4 text-center">Vencedor</th>
+<th class="p-4 text-center">Sequência</th>
+<th class="p-4 text-right font-bold text-primary">Pontos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+<td class="p-4 text-center font-bold text-white">4</td>
+<td class="p-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center text-xs font-bold text-white">RS</div>
+<span class="font-bold text-white">Rafael Souza</span>
+</td>
+<td class="p-4">
+<span class="px-2 py-1 rounded bg-tertiary-container/20 text-tertiary-fixed text-xs font-bold">Vendas</span>
+</td>
+<td class="p-4 text-center font-label-md">12</td>
+<td class="p-4 text-center font-label-md">34</td>
+<td class="p-4 text-center">
+<div class="flex items-center justify-center gap-1 text-orange-400">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-bold text-xs">3</span>
+</div>
+</td>
+<td class="p-4 text-right font-stats-xl text-xl text-primary font-black">13,200</td>
+</tr>
+<tr class="border-b border-white/5 hover:bg-white/5 transition-colors bg-white/[0.02]">
+<td class="p-4 text-center font-bold text-white">5</td>
+<td class="p-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center text-xs font-bold text-white">FM</div>
+<span class="font-bold text-white">Felipe Melo</span>
+</td>
+<td class="p-4">
+<span class="px-2 py-1 rounded bg-error-container/20 text-error text-xs font-bold">TI</span>
+</td>
+<td class="p-4 text-center font-label-md">11</td>
+<td class="p-4 text-center font-label-md">30</td>
+<td class="p-4 text-center">
+<div class="flex items-center justify-center gap-1 text-on-surface-variant/50">
+<span class="material-symbols-outlined text-sm">local_fire_department</span>
+<span class="font-bold text-xs">-</span>
+</div>
+</td>
+<td class="p-4 text-right font-stats-xl text-xl text-primary font-black">12,850</td>
+</tr>
+<tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+<td class="p-4 text-center font-bold text-white">6</td>
+<td class="p-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center text-xs font-bold text-white">JL</div>
+<span class="font-bold text-white">Juliana Lima</span>
+</td>
+<td class="p-4">
+<span class="px-2 py-1 rounded bg-primary-container/20 text-primary-fixed text-xs font-bold">RH</span>
+</td>
+<td class="p-4 text-center font-label-md">10</td>
+<td class="p-4 text-center font-label-md">28</td>
+<td class="p-4 text-center">
+<div class="flex items-center justify-center gap-1 text-orange-400">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-bold text-xs">2</span>
+</div>
+</td>
+<td class="p-4 text-right font-stats-xl text-xl text-primary font-black">11,900</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 flex justify-center border-t border-white/5 bg-surface-container-highest/20">
+<button class="px-4 py-2 text-sm font-bold text-white hover:text-primary transition-colors">Carregar mais...</button>
+</div>
+</section>
+</div>
+<!-- Right Column (Rules) -->
+<div class="lg:w-80 flex flex-col gap-8">
+<aside class="glass-card rounded-xl p-6 border-t-4 border-t-secondary-fixed">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-secondary-fixed text-3xl">gavel</span>
+<h3 class="font-headline-md text-headline-md font-bold text-white">Critérios de Desempate</h3>
+</div>
+<div class="space-y-4">
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0 border border-white/10 text-primary text-sm font-bold">1</div>
+<div>
+<h4 class="font-bold text-white text-sm mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">done_all</span> Placar Exato
+                                    </h4>
+<p class="text-xs text-on-surface-variant">Maior número de palpites com placar exato (ex: apostou 2x1 e o jogo foi 2x1).</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0 border border-white/10 text-primary text-sm font-bold">2</div>
+<div>
+<h4 class="font-bold text-white text-sm mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary-fixed">emoji_events</span> Vencedor Correto
+                                    </h4>
+<p class="text-xs text-on-surface-variant">Maior número de acertos do time vencedor ou empate.</p>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0 border border-white/10 text-primary text-sm font-bold">3</div>
+<div>
+<h4 class="font-bold text-white text-sm mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-tertiary-fixed">timer</span> Velocidade do Palpite
+                                    </h4>
+<p class="text-xs text-on-surface-variant">Quem enviou o palpite primeiro para o sistema.</p>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-white/10">
+<button class="w-full bg-transparent border-2 border-secondary-fixed text-white font-bold py-2 rounded hover:bg-secondary-fixed/10 transition-colors text-sm">
+                                Ler Regulamento Completo
+                            </button>
+</div>
+</aside>
+</div>
+</div>
+</main>
+</div>
+</body></html>

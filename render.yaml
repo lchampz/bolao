@@ -1,0 +1,77 @@
+# Blueprint de deploy gratuito no Render — https://render.com/docs/blueprint-spec
+#
+# ATENÇÃO (planos free): o Postgres free do Render expira 30 dias após a
+# criação (+14 dias de carência antes de ser apagado) e precisa ser recriado
+# ou promovido para um plano pago depois disso. O web service do backend
+# "dorme" após ~15 min sem tráfego e leva 30-60s para acordar na próxima
+# requisição. Ver docs/DEPLOY.md.
+
+databases:
+  - name: bolao-db
+    plan: free
+    databaseName: bolao
+    user: bolao
+
+services:
+  - type: web
+    name: bolao-server
+    runtime: docker
+    plan: free
+    rootDir: server
+    dockerfilePath: ./server/Dockerfile
+    dockerContext: ./server
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bolao-db
+          property: connectionString
+      - key: ALLOWED_ORIGIN
+        fromService:
+          type: web
+          name: bolao-web
+          property: host
+      - key: APP_URL
+        fromService:
+          type: web
+          name: bolao-web
+          property: host
+      # Credencial de administrador — obrigatório preencher no dashboard do
+      # Render após criar o blueprint (senão uma senha aleatória é gerada e
+      # só aparece nos logs do serviço). Ver docs/DEPLOY.md.
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      # Convites por e-mail (módulo de cadastro) — opcional: sem SMTP_HOST
+      # configurado, os convites só são logados no servidor (nunca enviados
+      # de fato). Preencha no dashboard do Render com qualquer provedor SMTP
+      # gratuito (Brevo, Resend, Mailtrap...). Ver docs/DEPLOY.md.
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+
+  # Static site: build nativo do Render (não usa o Dockerfile local) porque
+  # permite injetar VITE_API_URL em tempo de build via envVars — o runtime
+  # docker do Render não suporta build args customizados. Continua "de graça"
+  # (sem cold start, sem limite de horas) e sem custo, diferente do free tier
+  # de web service comum.
+  - type: web
+    name: bolao-web
+    runtime: static
+    rootDir: web
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: bolao-server
+          property: host

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Meus Palpites - Copa AMM 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;family=Montserrat:ital,wght@0,700;0,800;0,900;1,800&amp;family=Source+Sans+3:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#0b1326",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#748de0",
+                        "inverse-on-surface": "#283044",
+                        "tertiary-fixed-dim": "#b5c4ff",
+                        "outline-variant": "#3e4a3d",
+                        "on-primary-fixed-variant": "#00531c",
+                        "surface-container-lowest": "#060e20",
+                        "surface-variant": "#2d3449",
+                        "background": "#0b1326",
+                        "primary-fixed-dim": "#65df76",
+                        "on-surface-variant": "#bdcab9",
+                        "on-error-container": "#ffdad6",
+                        "surface": "#0b1326",
+                        "primary": "#65df76",
+                        "on-tertiary-container": "#00236c",
+                        "surface-container-low": "#131b2e",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#00174d",
+                        "on-primary": "#003911",
+                        "primary-container": "#23a646",
+                        "primary-fixed": "#81fc90",
+                        "inverse-primary": "#006e27",
+                        "surface-container-high": "#222a3d",
+                        "secondary-fixed-dim": "#e3c600",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#dbe1ff",
+                        "surface-container": "#171f33",
+                        "on-primary-fixed": "#002107",
+                        "on-primary-container": "#00320d",
+                        "on-secondary-fixed-variant": "#524700",
+                        "surface-container-highest": "#2d3449",
+                        "on-surface": "#dae2fd",
+                        "on-secondary": "#393000",
+                        "surface-bright": "#31394d",
+                        "on-tertiary-fixed-variant": "#25428f",
+                        "on-secondary-fixed": "#211b00",
+                        "tertiary": "#b5c4ff",
+                        "secondary": "#fffbff",
+                        "surface-tint": "#65df76",
+                        "on-secondary-container": "#716200",
+                        "on-background": "#dae2fd",
+                        "inverse-surface": "#dae2fd",
+                        "secondary-fixed": "#ffe243",
+                        "secondary-container": "#ffdf0a",
+                        "outline": "#879484",
+                        "on-tertiary": "#042978"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "base": "4px",
+                        "gutter": "24px",
+                        "container-max-width": "1440px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Montserrat"],
+                        "stats-xl": ["Montserrat"],
+                        "display-lg-mobile": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["\"Source Sans 3\""],
+                        "label-md": ["JetBrains Mono"],
+                        "body-md": ["\"Source Sans 3\""],
+                        "headline-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "stats-xl": ["40px", { "lineHeight": "40px", "fontWeight": "900" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0F172A; /* Base layer fallback before config */
+            background-image: radial-gradient(circle at top right, rgba(101,223,118,0.05), transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(35,166,70,0.05), transparent 40%);
+            background-attachment: fixed;
+            color: #dae2fd; /* on-background fallback */
+            min-height: 100vh;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .glass-card-floating {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px -10px rgba(6, 14, 32, 0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+        }
+        
+        .glass-card-floating:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px -15px rgba(101,223,118,0.2);
+        }
+        
+        .glow-button {
+            box-shadow: 0 0 15px rgba(101,223,118,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .glow-button:hover {
+            box-shadow: 0 0 25px rgba(101,223,118,0.6);
+            transform: scale(1.02);
+        }
+        
+        .score-input {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            text-align: center;
+        }
+        
+        .score-input:focus {
+            outline: none;
+            border-color: #65df76;
+            box-shadow: 0 0 10px rgba(101,223,118,0.2);
+            background: rgba(0,0,0,0.5);
+        }
+        
+        /* Webkit specific input spinner removal */
+        .score-input::-webkit-outer-spin-button,
+        .score-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .score-input[type=number] {
+            -moz-appearance: textfield;
+        }
+        
+        .stadium-halo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(101,223,118,0.15) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .progress-circle {
+            transition: stroke-dashoffset 1s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md overflow-x-hidden antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-0 md:left-64 z-40 bg-surface-container-lowest/50 backdrop-blur-md shadow-sm border-none bg-surface-container-low/30 h-20 w-full flex justify-between items-center px-margin-mobile md:px-margin-desktop">
+<div class="flex items-center md:hidden">
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-primary font-black">Copa AMM Points 2026</h1>
+</div>
+<div class="hidden md:flex flex-1 justify-end items-center space-x-6">
+<div class="relative focus-within:ring-2 focus-within:ring-primary rounded-full p-2 bg-surface/50 glass-panel">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer">search</span>
+</div>
+<div class="flex items-center space-x-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</button>
+<div class="h-10 w-10 rounded-full overflow-hidden border-2 border-primary/30">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="Close up professional headshot of a corporate employee with a subtle green stadium light reflecting on their face, high-end photography, cinematic lighting, dark background, suitable for a sports betting app avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC38yuBnnRuQucnzlTP8T4WPw7KmCOPJbKSBmzM3w8CBK4Hy5ijfyCIGql01MBdy2clfTXdnHjwFSEyD0psFKJtbFjMA5lBd1s5uOyWA9DSBT-Rt0OIfybpzwC-aXtr5UiggLXIK4GedRYsGj_zFUXT3upyCcgr7Wo20KJ-JRrQfyoeCljYifDOu9YX9pcJACiZW7yKEpSjAk25b8ZspTY7DDqpGWezHm1o-804kKonol69_aHoQ8qCor9xGBqD0vWz8-_JIIkaMDk"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex h-screen w-64 fixed left-0 top-0 bg-surface-dim/80 backdrop-blur-xl border-r border-white/10 shadow-2xl shadow-primary/10 flex-col h-full py-8 px-4 z-50">
+<div class="mb-12 text-center">
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-primary italic tracking-tighter">Copa AMM 2026</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mt-2">Temporada de Pontos</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 transition-all duration-300 active:scale-95 hover:shadow-[0_0_15px_rgba(101,223,118,0.3)] group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg bg-primary/20 text-primary border-r-4 border-primary font-bold transition-all duration-300 active:scale-95 hover:shadow-[0_0_15px_rgba(101,223,118,0.3)]" href="#">
+<span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+<span class="font-label-md text-label-md">Meus Palpites</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 transition-all duration-300 active:scale-95 hover:shadow-[0_0_15px_rgba(101,223,118,0.3)] group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">leaderboard</span>
+<span class="font-label-md text-label-md">Ranking</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 transition-all duration-300 active:scale-95 hover:shadow-[0_0_15px_rgba(101,223,118,0.3)] group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">groups</span>
+<span class="font-label-md text-label-md">Departamentos</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5 transition-all duration-300 active:scale-95 hover:shadow-[0_0_15px_rgba(101,223,118,0.3)] group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">settings</span>
+<span class="font-label-md text-label-md">Administracao</span>
+</a>
+</nav>
+<div class="mt-auto">
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-lg glow-button font-bold flex items-center justify-center">
+<span class="material-symbols-outlined mr-2">add</span>
+                Novo Palpite
+            </button>
+</div>
+</aside>
+<!-- Bottom Navigation (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container-highest/90 backdrop-blur-md border-none z-50 px-2 py-3 flex justify-around items-center glass-panel rounded-t-xl">
+<a class="flex flex-col items-center p-2 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-label-md mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center p-2 text-primary font-bold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+<span class="text-[10px] font-label-md mt-1">Palpites</span>
+</a>
+<a class="flex flex-col items-center p-2 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="text-[10px] font-label-md mt-1">Ranking</span>
+</a>
+<a class="flex flex-col items-center p-2 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-[10px] font-label-md mt-1">Depto</span>
+</a>
+</nav>
+<!-- Main Content Area -->
+<main class="pt-24 pb-24 md:pb-8 md:pl-72 pr-4 md:pr-margin-desktop min-h-screen">
+<!-- Header Section -->
+<section class="mb-8 md:mb-12 animate-fade-in-up">
+<div class="glass-panel rounded-xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+<div class="stadium-halo opacity-50"></div>
+<div class="z-10 text-center md:text-left">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-1">Meus Palpites</h2>
+<p class="font-body-lg text-body-lg text-primary font-medium tracking-wide">Oitavas de Final</p>
+</div>
+<div class="z-10 flex items-center bg-surface-container-low/50 rounded-full p-2 pr-6 border border-white/5">
+<div class="relative w-16 h-16 mr-4 flex-shrink-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="rgba(255,255,255,0.1)" stroke-width="8"></circle>
+<circle class="progress-circle" cx="50" cy="50" fill="none" r="45" stroke="#65df76" stroke-dasharray="283" stroke-dashoffset="70" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="font-label-md text-label-md text-white font-bold text-xs">75%</span>
+</div>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-white">12/16</p>
+<p class="font-label-md text-label-md text-on-surface-variant text-xs uppercase tracking-wider">Palpites Enviados</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Match Cards List -->
+<section class="space-y-6 max-w-4xl mx-auto">
+<!-- Card 1: Pending (Actionable) -->
+<article class="glass-card-floating rounded-xl p-4 md:p-6 relative overflow-hidden group">
+<div class="stadium-halo opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="bg-secondary-container/20 text-secondary-container border border-secondary-container/50 px-3 py-1 rounded-full flex items-center space-x-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span class="font-label-md text-label-md text-xs font-bold">Hoje, 16:00</span>
+</div>
+<!-- Empty State Badge -->
+<div class="bg-surface-variant/50 text-on-surface-variant border border-white/10 px-3 py-1 rounded-full flex items-center space-x-1">
+<span class="font-label-md text-label-md text-xs">Pendente</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+<!-- Team 1 (Home) -->
+<div class="flex flex-col items-center w-full md:w-1/3">
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-surface-container shadow-[0_0_20px_rgba(0,0,0,0.5)] mb-3 relative group-hover:scale-105 transition-transform duration-300">
+<img alt="Bandeira do Brasil" class="w-full h-full object-cover" data-alt="High quality vector style illustration of the Brazilian national flag, waving subtly, rich vibrant yellow and green colors, isolated on dark transparent background, suitable for a sleek sports UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqJH0SIMrJ_RhRNLnVZ6j8F0PccLzKeouIaVXl8XDWHe16IduiUo6iD8nQeqODLaEPTGPKOQ0nO3C63tzD8a1YtLh-9EJQkOxrATp20ueiV9OWC-dr8FLt3QQEEaRC1kbu2sZ0sYaKhQlIC6vd4NQqbjuzqmzxeymHVX-HYcQ379787pr4xwAoiyzIYyv1h54ADZiTbvBQcuYi_5Bw0ZDwl2dLarPOcABdRu7uXFy_edIECvIQoMehJOXjUOfCR9Cw-i0OtxPACTc"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-white">Brasil</h3>
+</div>
+<!-- Score Inputs -->
+<div class="flex items-center justify-center space-x-4 w-full md:w-1/3">
+<input class="w-20 h-24 md:w-24 md:h-28 rounded-lg score-input font-stats-xl text-stats-xl text-center shadow-inner focus:ring-0" max="99" min="0" placeholder="-" type="number" value=""/>
+<span class="font-stats-xl text-stats-xl text-on-surface-variant/50">X</span>
+<input class="w-20 h-24 md:w-24 md:h-28 rounded-lg score-input font-stats-xl text-stats-xl text-center shadow-inner focus:ring-0" max="99" min="0" placeholder="-" type="number" value=""/>
+</div>
+<!-- Team 2 (Away) -->
+<div class="flex flex-col items-center w-full md:w-1/3">
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-surface-container shadow-[0_0_20px_rgba(0,0,0,0.5)] mb-3 relative group-hover:scale-105 transition-transform duration-300">
+<img alt="Bandeira da França" class="w-full h-full object-cover" data-alt="High quality vector style illustration of the French national flag, bold blue white and red vertical stripes, waving subtly, isolated on dark transparent background, suitable for a sleek sports UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmOMRu4bo_07MLSb49ThAEcas2z7AFADYcuoeyxnXuDesxAmD5HlGsmUY3UurdcD3N_kixFoTU9RwhxAwj_0kzmZDUSx45hV1eR1fT4NG8MsO3Q9Hmcrk0GrXt0aUplCvu4dU39vLSGlyEzCX2xkzVHasAJJ5QGzRH-9r2rs_qORFZAoMMVGlfRoox3_IrM6NDtGowA16mAE3rj2y6-MMqGNs0hMQRSyraI9cl0gSQEtps_FKtkJEIKLo8MtdSq1HYU4M_4puQsbo"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-white">França</h3>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-white/10 flex justify-center relative z-10">
+<button class="bg-primary text-on-primary font-headline-md text-headline-md py-3 px-12 rounded-lg glow-button font-bold flex items-center justify-center w-full md:w-auto">
+                        Salvar Palpite
+                    </button>
+</div>
+</article>
+<!-- Card 2: Submitted -->
+<article class="glass-card-floating rounded-xl p-4 md:p-6 relative overflow-hidden opacity-90">
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="text-on-surface-variant px-3 py-1 flex items-center space-x-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span class="font-label-md text-label-md text-xs">05/07, 13:00</span>
+</div>
+<!-- Submitted Badge -->
+<div class="bg-primary-container/20 text-primary border border-primary/50 px-3 py-1 rounded-full flex items-center space-x-1 shadow-[0_0_10px_rgba(101,223,118,0.2)]">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md text-xs font-bold">Enviado</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+<div class="flex flex-col items-center w-full md:w-1/3">
+<div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-surface-container/50 opacity-80 mb-2">
+<img alt="Bandeira da Argentina" class="w-full h-full object-cover" data-alt="High quality vector style illustration of the Argentine national flag, light blue and white stripes with a sun emblem, isolated on dark transparent background, suitable for a sleek sports UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVsMdbS7ihoUahQJuicrFoxyCYc_OlMDK7Zxc5sZ1HNaHgRs5-P4JlFCKAkBljkTyQOPuLfCwTxS3SrdIBoAZJbiYL5hxGBGHxWb7t-H6EHL9DggZ_pQihO8NIsEqkphfw6ZK2cBDBX9ZPz-Q4mcMscvmNYkys_jBxVbrzluQrDeKppDL_OeoD5pVtyx3qsMWeFcSLmArfgPUI2pjrD8nOtSZMtFZERmXBfyL-Qa_COAotzG7s-tnOIRJXCtkxW_QjT1JDpwTbWe8"/>
+</div>
+<h3 class="font-headline-md text-[20px] text-on-surface">Argentina</h3>
+</div>
+<div class="flex items-center justify-center space-x-4 w-full md:w-1/3">
+<div class="w-16 h-20 md:w-20 md:h-24 rounded-lg bg-surface-container border border-primary/30 flex items-center justify-center shadow-inner relative">
+<div class="absolute inset-0 bg-primary/5 rounded-lg"></div>
+<span class="font-stats-xl text-stats-xl text-primary font-bold relative z-10">2</span>
+</div>
+<span class="font-stats-xl text-stats-xl text-on-surface-variant/30">X</span>
+<div class="w-16 h-20 md:w-20 md:h-24 rounded-lg bg-surface-container border border-primary/30 flex items-center justify-center shadow-inner relative">
+<div class="absolute inset-0 bg-primary/5 rounded-lg"></div>
+<span class="font-stats-xl text-stats-xl text-primary font-bold relative z-10">1</span>
+</div>
+</div>
+<div class="flex flex-col items-center w-full md:w-1/3">
+<div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-surface-container/50 opacity-80 mb-2">
+<img alt="Bandeira da Alemanha" class="w-full h-full object-cover" data-alt="High quality vector style illustration of the German national flag, black red and gold horizontal stripes, isolated on dark transparent background, suitable for a sleek sports UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG8XF5tiXoDUXwF22d4AdAqILKFlhPWwNj9QxTcv5qFlDeoCmaKNj9dmjJ_qKtbXuTPdDTD64nR6qCOJg0ILxGVXfwvHYhASwzRtfxZYKiLeEVhL69AtWmxI5NulOWrkBKyydG-2m__C6pVaLGL1laQft0f9vUObmHjMEA3PNYGIzv-8OeNrvznCq95JsbHhIR0nUE_27vCW-L0R677C7evEzTCWFlw597Q_YQIsW41NiBav0pq8S4YEcvSAOx6p05Zaeqgo3Rv-U"/>
+</div>
+<h3 class="font-headline-md text-[20px] text-on-surface">Alemanha</h3>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-white/5 flex justify-center relative z-10">
+<button class="text-primary hover:text-primary-fixed-dim font-label-md text-label-md py-2 px-6 rounded-lg border border-primary/30 hover:border-primary transition-colors flex items-center justify-center bg-transparent">
+<span class="material-symbols-outlined mr-2 text-[18px]">edit</span>
+                        Editar Palpite
+                    </button>
+</div>
+</article>
+<!-- Card 3: Locked -->
+<article class="glass-panel rounded-xl p-4 md:p-6 relative overflow-hidden opacity-60 grayscale-[30%]">
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div class="text-on-surface-variant/50 px-3 py-1 flex items-center space-x-1">
+<span class="font-label-md text-label-md text-xs">Ontem, 20:00</span>
+</div>
+<!-- Locked Badge -->
+<div class="bg-surface-variant text-on-surface-variant border border-white/5 px-3 py-1 rounded-full flex items-center space-x-1">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="font-label-md text-label-md text-xs">Prazo encerrado</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+<div class="flex flex-col items-center w-full md:w-1/3">
+<div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-surface-container/30 mb-2">
+<img alt="Bandeira da Espanha" class="w-full h-full object-cover opacity-70" data-alt="High quality vector style illustration of the Spanish national flag, red and yellow horizontal stripes with emblem, isolated on dark transparent background, subdued lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa_MbWHRcCa_M8QssXGh57UHzaXGTsGsoGSU6uaCx8j-LdtR-aYSbU88NVuao9CivxCUH_WuuicjYQ8ek2bbJCG-38uCdX6jYDGoXa5tkaIJA2mqwqWk2Ww_ljq3KVvNJdCBkio0VmhMqSJUMkqrpdJEhZZxSeJletZDVvBq2j0GfHmCJCmB_y-bMnawEavFhVqbus1I1rIlt6e8fmU-mqqtECPkFbcRcabAnh35_4n7dg694EiuQS4PhN1jGSN6WmlOGwN9--cnU"/>
+</div>
+<h3 class="font-headline-md text-[20px] text-on-surface-variant">Espanha</h3>
+</div>
+<div class="flex items-center justify-center space-x-4 w-full md:w-1/3">
+<div class="w-16 h-20 md:w-20 md:h-24 rounded-lg bg-surface-container-low border border-white/5 flex items-center justify-center shadow-inner">
+<span class="font-stats-xl text-stats-xl text-on-surface-variant">0</span>
+</div>
+<span class="font-stats-xl text-stats-xl text-on-surface-variant/20">X</span>
+<div class="w-16 h-20 md:w-20 md:h-24 rounded-lg bg-surface-container-low border border-white/5 flex items-center justify-center shadow-inner">
+<span class="font-stats-xl text-stats-xl text-on-surface-variant">3</span>
+</div>
+</div>
+<div class="flex flex-col items-center w-full md:w-1/3">
+<div class="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-surface-container/30 mb-2">
+<img alt="Bandeira de Portugal" class="w-full h-full object-cover opacity-70" data-alt="High quality vector style illustration of the Portuguese national flag, green and red vertical bands with sphere emblem, isolated on dark transparent background, subdued lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmif23NuXSGQCyXlgo1PZOrXgZ1P-c7QrRzQpDY0rXiX4hz0lh3-XWqHCCRKz-dOnj77Qo06bugTI_JB-v-6W5KlrQoe9pJdY2ggqGwJiRz-iQq8YhVXRz431nb7pZN_GFcfF_dAqidfw1EbDQiJgMbJJqtLy8Lo_60tydX6xHeU9l5xkgwytgNSsy8_4dX2vYnVW3q2s7kVR26Wwv3DkqRXOENyIZEEfPOREUUkTaBqBY99ZAH6lu60l6yaCNT8K6ZxxBe6aSCVU"/>
+</div>
+<h3 class="font-headline-md text-[20px] text-on-surface-variant">Portugal</h3>
+</div>
+</div>
+</article>
+</section>
+</main>
+<script>
+        // Simple animation to draw the progress circle on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const circle = document.querySelector('.progress-circle');
+                if(circle) {
+                    // 283 is full circumference, offset 70 is roughly 75% progress (283 * 0.25)
+                    circle.style.strokeDashoffset = '70'; 
+                }
+            }, 300);
+        });
+    </script>
+</body></html>
