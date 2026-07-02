@@ -50,6 +50,7 @@ invitesRouter.post(
       area: parsed.data.area,
       email: invite.email,
       createdAt: new Date().toISOString(),
+      lastSeenAt: null,
     };
     await createParticipant(participant);
     await markInviteAccepted(invite.id, participant.id);

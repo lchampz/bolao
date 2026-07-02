@@ -29,6 +29,14 @@ export interface Participant {
   area: Area;
   email: string | null;
   createdAt: string;
+  lastSeenAt: string | null;
+}
+
+export interface Message {
+  id: string;
+  participantId: string;
+  content: string;
+  createdAt: string;
 }
 
 export type InviteStatus = "PENDING" | "ACCEPTED";

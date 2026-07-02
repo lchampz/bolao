@@ -72,6 +72,16 @@ export async function initSchema(): Promise<void> {
       key TEXT PRIMARY KEY,
       value TEXT NOT NULL
     );
+
+    -- Chat geral entre participantes (inspirado no Discord) — ver
+    -- server/src/routes/chat.ts.
+    CREATE TABLE IF NOT EXISTS messages (
+      id TEXT PRIMARY KEY,
+      "participantId" TEXT NOT NULL REFERENCES participants(id),
+      content TEXT NOT NULL,
+      "createdAt" TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS messages_created_at_idx ON messages ("createdAt");
   `);
 
   // Migração aditiva para bancos criados antes do sync automático de fixtures.
@@ -82,6 +92,9 @@ export async function initSchema(): Promise<void> {
 
   // Migração aditiva para bancos criados antes do módulo de convites.
   await pool.query(`ALTER TABLE participants ADD COLUMN IF NOT EXISTS email TEXT`);
+
+  // Migração aditiva para bancos criados antes da presença online/offline do chat.
+  await pool.query(`ALTER TABLE participants ADD COLUMN IF NOT EXISTS "lastSeenAt" TEXT`);
 
   await pool.query(
     `INSERT INTO config (key, value) VALUES ('antecedenciaMinutos', '120') ON CONFLICT (key) DO NOTHING`,

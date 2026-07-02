@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { api } from "../api";
 import type { Participant } from "../types";
 
 interface ParticipantContextValue {
@@ -10,6 +11,7 @@ interface ParticipantContextValue {
 const ParticipantContext = createContext<ParticipantContextValue | null>(null);
 
 const STORAGE_KEY = "bolao.participant";
+const PRESENCE_PING_INTERVAL_MS = 25_000;
 
 export function ParticipantProvider({ children }: { children: ReactNode }) {
   const [participant, setParticipant] = useState<Participant | null>(null);
@@ -18,6 +20,17 @@ export function ParticipantProvider({ children }: { children: ReactNode }) {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) setParticipant(JSON.parse(raw));
   }, []);
+
+  // Heartbeat de presença (online/offline no Chat, inspirado no Discord) —
+  // roda em qualquer página enquanto houver sessão, não só no Chat.
+  useEffect(() => {
+    if (!participant) return;
+    api.pingPresence(participant.id).catch(() => {});
+    const interval = setInterval(() => {
+      api.pingPresence(participant.id).catch(() => {});
+    }, PRESENCE_PING_INTERVAL_MS);
+    return () => clearInterval(interval);
+  }, [participant?.id]);
 
   function login(created: Participant) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(created));

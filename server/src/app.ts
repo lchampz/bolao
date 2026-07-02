@@ -3,6 +3,7 @@ import express from "express";
 import type { NextFunction, Request, Response } from "express";
 import { adminRouter } from "./routes/admin.js";
 import { authRouter } from "./routes/auth.js";
+import { chatRouter } from "./routes/chat.js";
 import { configRouter } from "./routes/config.js";
 import { gamesRouter } from "./routes/games.js";
 import { invitesRouter } from "./routes/invites.js";
@@ -29,6 +30,7 @@ app.use(express.json());
 app.get("/health", (_req, res) => res.json({ status: "ok" }));
 
 app.use("/api", authRouter);
+app.use("/api", chatRouter);
 app.use("/api", configRouter);
 app.use("/api", gamesRouter);
 app.use("/api", participantsRouter);

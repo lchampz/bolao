@@ -184,8 +184,8 @@ describe("roundHighScoreBonus (HU-04.4)", () => {
 describe("computeBreakdowns + rankBreakdowns (integration)", () => {
   const config: Config = { antecedenciaMinutos: 120 };
   const participants: Participant[] = [
-    { id: "a", name: "Ana", area: "TI", email: null, createdAt: "2026-07-01T00:00:00Z" },
-    { id: "b", name: "Bruno", area: "RH", email: null, createdAt: "2026-07-01T00:00:00Z" },
+    { id: "a", name: "Ana", area: "TI", email: null, createdAt: "2026-07-01T00:00:00Z", lastSeenAt: null },
+    { id: "b", name: "Bruno", area: "RH", email: null, createdAt: "2026-07-01T00:00:00Z", lastSeenAt: null },
   ];
   const game = makeGame();
 

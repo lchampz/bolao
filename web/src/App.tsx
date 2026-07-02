@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Picks from "./pages/Picks";
 import Ranking from "./pages/Ranking";
 import Departments from "./pages/Departments";
+import Chat from "./pages/Chat";
 import Admin from "./pages/Admin";
 import Invites from "./pages/Invites";
 import AcceptInvite from "./pages/AcceptInvite";
@@ -14,6 +15,7 @@ const NAV_ITEMS = [
   { to: "/", icon: "dashboard", label: "Dashboard" },
   { to: "/palpites", icon: "sports_soccer", label: "Meus Palpites" },
   { to: "/ranking", icon: "leaderboard", label: "Ranking" },
+  { to: "/chat", icon: "forum", label: "Chat" },
   { to: "/departamentos", icon: "groups", label: "Departamentos" },
 ];
 
@@ -120,7 +122,7 @@ function TopAppBar() {
 function BottomNav() {
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container-highest/90 backdrop-blur-md z-50 px-2 py-3 flex justify-around items-center glass-panel rounded-t-xl">
-      {NAV_ITEMS.slice(0, 4).map((item) => (
+      {NAV_ITEMS.map((item) => (
         <NavLink
           key={item.to}
           to={item.to}
@@ -150,6 +152,7 @@ function Shell() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/palpites" element={<Picks />} />
           <Route path="/ranking" element={<Ranking />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="/departamentos" element={<Departments />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/convites" element={<Invites />} />

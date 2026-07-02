@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { pool } from "./db.js";
-import type { Config, Game, Invite, Participant, Phase, Pick, Team } from "./types.js";
+import type { Config, Game, Invite, Message, Participant, Phase, Pick, Team } from "./types.js";
 
 export async function getTeams(): Promise<Team[]> {
   const { rows } = await pool.query("SELECT * FROM teams");
@@ -35,6 +35,15 @@ export async function getParticipants(): Promise<Participant[]> {
 export async function getParticipantByEmail(email: string): Promise<Participant | undefined> {
   const { rows } = await pool.query("SELECT * FROM participants WHERE lower(email) = lower($1)", [email]);
   return rows[0];
+}
+
+export async function getParticipant(id: string): Promise<Participant | undefined> {
+  const { rows } = await pool.query("SELECT * FROM participants WHERE id = $1", [id]);
+  return rows[0];
+}
+
+export async function touchParticipantLastSeen(id: string): Promise<void> {
+  await pool.query('UPDATE participants SET "lastSeenAt" = $1 WHERE id = $2', [new Date().toISOString(), id]);
 }
 
 export async function createParticipant(participant: Participant): Promise<void> {
@@ -209,4 +218,37 @@ export async function setConfig(config: Config): Promise<void> {
     `,
     [String(config.antecedenciaMinutos)],
   );
+}
+
+export interface MessageWithAuthor extends Message {
+  participantName: string;
+  participantArea: string;
+}
+
+const MESSAGE_HISTORY_LIMIT = 300;
+
+export async function getMessages(): Promise<MessageWithAuthor[]> {
+  const { rows } = await pool.query(
+    `
+    SELECT m.id, m."participantId", m.content, m."createdAt",
+           p.name AS "participantName", p.area AS "participantArea"
+    FROM messages m
+    JOIN participants p ON p.id = m."participantId"
+    ORDER BY m."createdAt" ASC
+    LIMIT $1
+    `,
+    [MESSAGE_HISTORY_LIMIT],
+  );
+  return rows;
+}
+
+export async function createMessage(message: Message): Promise<void> {
+  await pool.query(
+    'INSERT INTO messages (id, "participantId", content, "createdAt") VALUES ($1, $2, $3, $4)',
+    [message.id, message.participantId, message.content, message.createdAt],
+  );
+}
+
+export async function deleteMessage(id: string): Promise<void> {
+  await pool.query("DELETE FROM messages WHERE id = $1", [id]);
 }

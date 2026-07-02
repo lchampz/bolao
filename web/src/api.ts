@@ -1,4 +1,4 @@
-import type { Area, Game, Invite, InviteStatus, Participant, Pick, Prize, RankingEntry, Team } from "./types";
+import type { Area, Game, Invite, InviteStatus, Message, Participant, Pick, Prize, RankingEntry, Team } from "./types";
 
 // Em produção (Render) o front e o back são serviços separados — aponte para
 // a URL pública do backend via VITE_API_URL. Em dev/docker-compose local,
@@ -104,4 +104,11 @@ export const api = {
       { method: "POST", body: JSON.stringify({ csv }) },
     ),
   resendInvite: (id: string) => adminRequest<{ ok: true }>(`/admin/invites/${id}/resend`, { method: "POST" }),
+
+  getChatMessages: () => request<Message[]>("/chat/messages"),
+  sendChatMessage: (participantId: string, content: string) =>
+    request<Message>("/chat/messages", { method: "POST", body: JSON.stringify({ participantId, content }) }),
+  pingPresence: (participantId: string) =>
+    request<{ ok: true }>("/presence/ping", { method: "POST", body: JSON.stringify({ participantId }) }),
+  deleteChatMessage: (id: string) => adminRequest<{ ok: true }>(`/admin/chat/messages/${id}`, { method: "DELETE" }),
 };

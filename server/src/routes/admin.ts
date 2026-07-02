@@ -6,6 +6,7 @@ import { parseEmailsFromCsv } from "../csv.js";
 import { syncFixtures } from "../fixtures.js";
 import { sendInviteEmail } from "../mailer.js";
 import {
+  deleteMessage,
   getConfig,
   getGame,
   getInviteById,
@@ -197,6 +198,18 @@ adminRouter.post(
       res.status(502).json({ error: `Falha ao enviar e-mail: ${(err as Error).message}` });
       return;
     }
+    res.json({ ok: true });
+  }),
+);
+
+// --- chat (moderação) ---------------------------------------------------
+
+// Remove uma mensagem do chat geral — único poder de moderação por ora, o
+// resto (bloquear participante, etc.) não foi pedido. Ver server/src/routes/chat.ts.
+adminRouter.delete(
+  "/admin/chat/messages/:id",
+  asyncHandler(async (req, res) => {
+    await deleteMessage(req.params.id);
     res.json({ ok: true });
   }),
 );
