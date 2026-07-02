@@ -3,9 +3,15 @@ import type { Area, Game, Invite, InviteStatus, Participant, Pick, Prize, Rankin
 // Em produção (Render) o front e o back são serviços separados — aponte para
 // a URL pública do backend via VITE_API_URL. Em dev/docker-compose local,
 // deixe vazio: a chamada relativa é resolvida pelo proxy do Vite/nginx.
-// O Render's `fromService` só expõe o host (sem protocolo) — completa aqui.
-const rawApiBase = import.meta.env.VITE_API_URL ?? "";
-const API_BASE = rawApiBase && !rawApiBase.startsWith("http") ? `https://${rawApiBase}` : rawApiBase;
+// O `fromService`/`property: host` do Render devolve só o slug do serviço
+// (ex. "bolao-server-8bi1"), sem o domínio — sem isso o fetch tenta resolver
+// esse nome como host de verdade e falha com ERR_NAME_NOT_RESOLVED.
+function resolveRenderHost(raw: string): string {
+  if (!raw || raw.startsWith("http")) return raw;
+  const withDomain = raw.includes(".") ? raw : `${raw}.onrender.com`;
+  return `https://${withDomain}`;
+}
+const API_BASE = resolveRenderHost(import.meta.env.VITE_API_URL ?? "");
 
 const ADMIN_TOKEN_KEY = "bolao.adminToken";
 

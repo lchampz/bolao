@@ -3,8 +3,13 @@ import nodemailer from "nodemailer";
 
 const { RESEND_API_KEY, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_SECURE, EMAIL_FROM } = process.env;
 
-const APP_URL = process.env.APP_URL ?? "http://localhost:5173";
-const appOrigin = APP_URL.startsWith("http") ? APP_URL : `https://${APP_URL}`;
+// O `fromService`/`property: host` do Render devolve só o slug do serviço
+// (ex. "bolao-web-d8bw"), sem o domínio ".onrender.com" — sem isso os links
+// de convite/login apontam pra um host que não existe.
+const rawAppUrl = process.env.APP_URL || "http://localhost:5173";
+const appOrigin = rawAppUrl.startsWith("http")
+  ? rawAppUrl
+  : `https://${rawAppUrl.includes(".") ? rawAppUrl : `${rawAppUrl}.onrender.com`}`;
 // "bolao.local" não é um domínio real — nunca passaria a verificação de
 // domínio do Resend. Sem EMAIL_FROM configurado, cai no sender de teste do
 // Resend (funciona sem verificar domínio, mas só é indicado para teste —

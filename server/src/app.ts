@@ -12,10 +12,15 @@ import { picksRouter } from "./routes/picks.js";
 import { prizesRouter } from "./routes/prizes.js";
 import { rankingRouter } from "./routes/ranking.js";
 
-// O `fromService` do Render só expõe o host (sem protocolo) — completa aqui.
-const rawAllowedOrigin = process.env.ALLOWED_ORIGIN;
-const allowedOrigin =
-  rawAllowedOrigin && !rawAllowedOrigin.startsWith("http") ? `https://${rawAllowedOrigin}` : rawAllowedOrigin;
+// O `fromService`/`property: host` do Render devolve só o slug do serviço
+// (ex. "bolao-web-d8bw"), sem o domínio ".onrender.com" — sem isso o CORS
+// compara contra um host que não existe e bloqueia tudo.
+function resolveRenderHost(raw: string | undefined): string | undefined {
+  if (!raw || raw.startsWith("http")) return raw;
+  const withDomain = raw.includes(".") ? raw : `${raw}.onrender.com`;
+  return `https://${withDomain}`;
+}
+const allowedOrigin = resolveRenderHost(process.env.ALLOWED_ORIGIN);
 
 export const app = express();
 app.use(cors(allowedOrigin ? { origin: allowedOrigin } : {}));
