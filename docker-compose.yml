@@ -28,13 +28,17 @@ services:
       # é gerada e só aparece no log do container (docker compose logs server).
       ADMIN_EMAIL: ${ADMIN_EMAIL:-}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
-      # Sem SMTP_HOST, os convites são só logados no console (ver server/src/mailer.ts).
+      # E-mail: Resend (preferido) > SMTP genérico > console (ver server/src/mailer.ts).
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
       SMTP_HOST: ${SMTP_HOST:-}
       SMTP_PORT: ${SMTP_PORT:-587}
       SMTP_SECURE: ${SMTP_SECURE:-false}
       SMTP_USER: ${SMTP_USER:-}
       SMTP_PASS: ${SMTP_PASS:-}
-      EMAIL_FROM: ${EMAIL_FROM:-Bolão Copa AMM <no-reply@bolao.local>}
+      # Sem valor aqui de propósito — o mailer escolhe um remetente padrão
+      # sensato sozinho (resend.dev de teste ou bolao.local) conforme o que
+      # estiver configurado. Ver server/src/mailer.ts.
+      EMAIL_FROM: ${EMAIL_FROM:-}
     ports:
       - "4000:4000"
     depends_on:

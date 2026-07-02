@@ -48,24 +48,31 @@ Os itens **Administração** e **Convites** só aparecem na sidebar depois do
 login de admin — continuam acessíveis por URL direta (protegidos por login,
 não por ocultação) para o próprio admin conseguir entrar.
 
-**Envio de e-mail é opcional.** Sem `SMTP_HOST` configurado, o convite não é
-enviado de verdade — o link só é logado no console do servidor (dá pra testar
-o fluxo inteiro assim, sem credenciais). Para envio real, configure qualquer
-provedor SMTP gratuito nas variáveis de ambiente do `server`:
+**Envio de e-mail é opcional.** Sem nenhum provedor configurado, o convite
+não é enviado de verdade — o link só é logado no console do servidor (dá pra
+testar o fluxo inteiro assim, sem credenciais). Ver
+[server/src/mailer.ts](../server/src/mailer.ts) — ordem de preferência:
+
+1. **Resend** (`RESEND_API_KEY`) — usa a API deles diretamente ([resend](https://www.npmjs.com/package/resend) npm), não SMTP. Tier gratuito: 3.000 e-mails/mês, 100/dia. [Criar chave](https://resend.com/api-keys).
+2. **SMTP genérico** (`SMTP_HOST`/`PORT`/`USER`/`PASS`) — qualquer provedor (Brevo, Mailtrap, ou o próprio Resend via SMTP). Usado só se `RESEND_API_KEY` não estiver setada.
+3. **Console** (fallback, nenhuma credencial).
+
+⚠️ **Resend sem domínio verificado** (`EMAIL_FROM` não setado) usa o sender
+de teste `onboarding@resend.dev`, que só consegue enviar para o e-mail da
+própria conta Resend — qualquer outro destinatário retorna erro. Serve para
+confirmar que a integração funciona, mas para convidar de verdade qualquer
+colaborador é preciso [verificar um domínio](https://resend.com/domains) e
+setar `EMAIL_FROM` com um endereço desse domínio.
 
 | Variável | Exemplo |
 |---|---|
+| `RESEND_API_KEY` | `re_xxx` |
 | `SMTP_HOST` | `smtp-relay.brevo.com` |
-| `SMTP_PORT` | `587` |
-| `SMTP_USER` | seu usuário SMTP |
-| `SMTP_PASS` | sua senha/chave SMTP |
 | `EMAIL_FROM` | `Bolão Copa AMM <no-reply@suaempresa.com>` |
-| `APP_URL` | URL pública do `web` (usada para montar o link do convite) |
+| `APP_URL` | URL pública do `web` (usada para montar os links de convite/login) |
 
-Provedores com tier gratuito: [Brevo](https://www.brevo.com/) (300 e-mails/dia),
-[Resend](https://resend.com/) (3.000/mês). No Render, essas variáveis já
-ficam pré-cadastradas em `render.yaml` como `sync: false` — preencha os
-valores reais no dashboard depois do primeiro deploy.
+No Render, essas variáveis já ficam pré-cadastradas em `render.yaml` como
+`sync: false` — preencha os valores reais no dashboard depois do primeiro deploy.
 
 ## Times, jogos e resultados são automáticos
 
@@ -101,9 +108,15 @@ Derrubar tudo: `docker compose down` (adicione `-v` para apagar os dados do Post
 ## Render (plano gratuito)
 
 O [`render.yaml`](../render.yaml) na raiz é um Blueprint — no dashboard do
-Render, escolha **New > Blueprint** e aponte para este repositório (precisa
-estar num repo Git conectado ao GitHub/GitLab; este projeto ainda não tem
-`git init` feito).
+Render, escolha **New > Blueprint** e aponte para o repositório
+[lchampz/bolao](https://github.com/lchampz/bolao) (já existe e está com o
+código atualizado). O Render detecta o `render.yaml` automaticamente.
+
+**Isso só pode ser feito pelo dashboard** — a API do Render não tem endpoint
+de "criar Blueprint" (só validar/listar/atualizar/desconectar um que já
+existe), então nem um script nem um MCP pulam esse primeiro clique. Depois
+de criado, preencha as variáveis marcadas `sync: false` (credencial de
+admin, e-mail) no dashboard.
 
 Ele cria 3 recursos, todos no plano free:
 
@@ -136,3 +149,24 @@ Se o bolão for para além de ~30 dias ou o cold start for um problema real de
 usabilidade, vale migrar `bolao-db` para o plano `starter` do Postgres antes
 da expiração (Render permite promover sem perder dados) — ver
 [Flexible Plans for Render Postgres](https://render.com/docs/postgresql-refresh).
+
+### Deploys depois do primeiro (script)
+
+Depois que o Blueprint existe, [`scripts/render-deploy.sh`](../scripts/render-deploy.sh)
+automatiza o resto via [API REST do Render](https://api-docs.render.com/) —
+não existe um MCP conectado nesta sessão para isso nem foi conectado a
+pedido; o script usa sua `RENDER_API_KEY` só no ambiente do terminal, nunca
+salva em arquivo:
+
+```bash
+export RENDER_API_KEY=rnd_xxx   # dashboard.render.com/u/settings#api-keys
+./scripts/render-deploy.sh list             # lista os serviços da conta
+./scripts/render-deploy.sh deploy bolao-server   # dispara um novo deploy
+./scripts/render-deploy.sh status bolao-server   # status do último deploy
+```
+
+Note que a `RENDER_API_KEY` dá acesso a **toda** a conta Render (todos os
+workspaces), não só a este projeto — trate como qualquer outra credencial
+sensível. Existe também o [MCP oficial do Render](https://render.com/docs/mcp-server)
+(`mcp.render.com`) se preferir controlar a conta por conversa em vez de
+script — mesma chave, mesmo cuidado.

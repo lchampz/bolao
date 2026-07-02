@@ -43,10 +43,12 @@ services:
         sync: false
       - key: ADMIN_PASSWORD
         sync: false
-      # Convites por e-mail (módulo de cadastro) — opcional: sem SMTP_HOST
-      # configurado, os convites só são logados no servidor (nunca enviados
-      # de fato). Preencha no dashboard do Render com qualquer provedor SMTP
-      # gratuito (Brevo, Resend, Mailtrap...). Ver docs/DEPLOY.md.
+      # Convites/links de acesso por e-mail — opcional: sem RESEND_API_KEY nem
+      # SMTP_HOST configurados, os e-mails só são logados no servidor (nunca
+      # enviados de fato). Resend tem prioridade sobre SMTP se ambos setados.
+      # Preencha no dashboard do Render. Ver docs/DEPLOY.md.
+      - key: RESEND_API_KEY
+        sync: false
       - key: SMTP_HOST
         sync: false
       - key: SMTP_PORT

@@ -1,11 +1,21 @@
+import { Resend } from "resend";
 import nodemailer from "nodemailer";
 
-const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_SECURE, EMAIL_FROM } = process.env;
+const { RESEND_API_KEY, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_SECURE, EMAIL_FROM } = process.env;
 
 const APP_URL = process.env.APP_URL ?? "http://localhost:5173";
 const appOrigin = APP_URL.startsWith("http") ? APP_URL : `https://${APP_URL}`;
+// "bolao.local" não é um domínio real — nunca passaria a verificação de
+// domínio do Resend. Sem EMAIL_FROM configurado, cai no sender de teste do
+// Resend (funciona sem verificar domínio, mas só é indicado para teste —
+// ver docs/DEPLOY.md). SMTP genérico não tem essa restrição.
+// "||" (não "??") de propósito — docker-compose resolve env var vazia como
+// string vazia, não undefined, e isso também deve cair no padrão.
+const from = EMAIL_FROM || (RESEND_API_KEY ? "Bolão Copa AMM <onboarding@resend.dev>" : "Bolão Copa AMM <no-reply@bolao.local>");
 
-const transporter = SMTP_HOST
+const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
+
+const smtpTransporter = SMTP_HOST
   ? nodemailer.createTransport({
       host: SMTP_HOST,
       port: Number(SMTP_PORT ?? 587),
@@ -23,17 +33,23 @@ export function loginUrl(token: string): string {
 }
 
 /**
- * Sem SMTP_HOST configurado, apenas loga o e-mail no console — permite testar
- * os fluxos de convite/login em dev/local sem precisar de credenciais SMTP
- * reais. Configure SMTP_HOST/PORT/USER/PASS (qualquer provedor: Brevo, Resend,
- * Mailtrap, etc.) para envio real. Ver docs/DEPLOY.md.
+ * Ordem de preferência: Resend (API própria, `RESEND_API_KEY`) → SMTP
+ * genérico (`SMTP_HOST`, qualquer provedor: Brevo, Mailtrap, o próprio Resend
+ * via SMTP, etc.) → console (dev/local, sem credenciais). Ver docs/DEPLOY.md.
  */
 async function sendEmail(to: string, subject: string, text: string, html: string): Promise<void> {
-  if (!transporter) {
-    console.log(`[mailer] SMTP não configurado — envio simulado para ${to}:\n${text}`);
+  if (resend) {
+    const { error } = await resend.emails.send({ from, to, subject, text, html });
+    if (error) throw new Error(`Resend falhou: ${error.message}`);
     return;
   }
-  await transporter.sendMail({ from: EMAIL_FROM ?? "Bolão Copa AMM <no-reply@bolao.local>", to, subject, text, html });
+
+  if (smtpTransporter) {
+    await smtpTransporter.sendMail({ from, to, subject, text, html });
+    return;
+  }
+
+  console.log(`[mailer] Nenhum provedor configurado — envio simulado para ${to}:\n${text}`);
 }
 
 export async function sendInviteEmail(email: string, token: string): Promise<void> {
