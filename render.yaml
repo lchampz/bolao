@@ -43,11 +43,11 @@ services:
         sync: false
       - key: ADMIN_PASSWORD
         sync: false
-      # Convites/links de acesso por e-mail — opcional: sem RESEND_API_KEY nem
+      # Convites/links de acesso por e-mail — opcional: sem BREVO_API_KEY nem
       # SMTP_HOST configurados, os e-mails só são logados no servidor (nunca
-      # enviados de fato). Resend tem prioridade sobre SMTP se ambos setados.
+      # enviados de fato). Brevo tem prioridade sobre SMTP se ambos setados.
       # Preencha no dashboard do Render. Ver docs/DEPLOY.md.
-      - key: RESEND_API_KEY
+      - key: BREVO_API_KEY
         sync: false
       - key: SMTP_HOST
         sync: false

@@ -118,8 +118,8 @@ async function createAndSend(email: string) {
     try {
       await sendInviteEmail(invite.email, invite.token);
     } catch (err) {
-      // O convite já foi salvo — um erro de envio (ex. domínio não
-      // verificado no Resend) não deve derrubar a criação. Reenviar
+      // O convite já foi salvo — um erro de envio (ex. remetente não
+      // verificado no Brevo) não deve derrubar a criação. Reenviar
       // continua disponível depois de corrigir a configuração de e-mail.
       emailError = (err as Error).message;
       console.error(`[invites] falha ao enviar e-mail para ${email}:`, emailError);

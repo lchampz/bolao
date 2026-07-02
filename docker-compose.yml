@@ -28,16 +28,16 @@ services:
       # é gerada e só aparece no log do container (docker compose logs server).
       ADMIN_EMAIL: ${ADMIN_EMAIL:-}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
-      # E-mail: Resend (preferido) > SMTP genérico > console (ver server/src/mailer.ts).
-      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      # E-mail: Brevo (preferido) > SMTP genérico > console (ver server/src/mailer.ts).
+      BREVO_API_KEY: ${BREVO_API_KEY:-}
       SMTP_HOST: ${SMTP_HOST:-}
       SMTP_PORT: ${SMTP_PORT:-587}
       SMTP_SECURE: ${SMTP_SECURE:-false}
       SMTP_USER: ${SMTP_USER:-}
       SMTP_PASS: ${SMTP_PASS:-}
-      # Sem valor aqui de propósito — o mailer escolhe um remetente padrão
-      # sensato sozinho (resend.dev de teste ou bolao.local) conforme o que
-      # estiver configurado. Ver server/src/mailer.ts.
+      # Sem valor aqui, cai no padrão "no-reply@bolao.local" do mailer — só
+      # funciona de verdade com um remetente verificado no Brevo (ver
+      # docs/DEPLOY.md e server/src/mailer.ts).
       EMAIL_FROM: ${EMAIL_FROM:-}
     ports:
       - "4000:4000"

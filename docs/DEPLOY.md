@@ -53,20 +53,20 @@ não é enviado de verdade — o link só é logado no console do servidor (dá 
 testar o fluxo inteiro assim, sem credenciais). Ver
 [server/src/mailer.ts](../server/src/mailer.ts) — ordem de preferência:
 
-1. **Resend** (`RESEND_API_KEY`) — usa a API deles diretamente ([resend](https://www.npmjs.com/package/resend) npm), não SMTP. Tier gratuito: 3.000 e-mails/mês, 100/dia. [Criar chave](https://resend.com/api-keys).
-2. **SMTP genérico** (`SMTP_HOST`/`PORT`/`USER`/`PASS`) — qualquer provedor (Brevo, Mailtrap, ou o próprio Resend via SMTP). Usado só se `RESEND_API_KEY` não estiver setada.
+1. **Brevo** (`BREVO_API_KEY`) — usa a API deles diretamente ([@getbrevo/brevo](https://www.npmjs.com/package/@getbrevo/brevo) npm), não SMTP. Tier gratuito: 300 e-mails/dia. [Criar chave](https://app.brevo.com/settings/keys/api).
+2. **SMTP genérico** (`SMTP_HOST`/`PORT`/`USER`/`PASS`) — qualquer provedor (Mailtrap, o próprio Brevo via SMTP, etc). Usado só se `BREVO_API_KEY` não estiver setada.
 3. **Console** (fallback, nenhuma credencial).
 
-⚠️ **Resend sem domínio verificado** (`EMAIL_FROM` não setado) usa o sender
-de teste `onboarding@resend.dev`, que só consegue enviar para o e-mail da
-própria conta Resend — qualquer outro destinatário retorna erro. Serve para
-confirmar que a integração funciona, mas para convidar de verdade qualquer
-colaborador é preciso [verificar um domínio](https://resend.com/domains) e
-setar `EMAIL_FROM` com um endereço desse domínio.
+⚠️ **Brevo exige um remetente verificado** — diferente do Resend, não tem
+um sender de teste anônimo. Vá em **Senders, Domains & Dedicated IPs** no
+painel do Brevo, adicione o e-mail que você quer usar como remetente
+(confirmação por clique no e-mail, não precisa verificar um domínio inteiro)
+e configure `EMAIL_FROM` com exatamente esse endereço. Sem isso o envio
+falha com erro de remetente inválido.
 
 | Variável | Exemplo |
 |---|---|
-| `RESEND_API_KEY` | `re_xxx` |
+| `BREVO_API_KEY` | `xkeysib-xxx` |
 | `SMTP_HOST` | `smtp-relay.brevo.com` |
 | `EMAIL_FROM` | `Bolão Copa AMM <no-reply@suaempresa.com>` |
 | `APP_URL` | URL pública do `web` (usada para montar os links de convite/login) |

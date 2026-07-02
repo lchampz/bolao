@@ -1,7 +1,7 @@
-import { Resend } from "resend";
+import { BrevoClient } from "@getbrevo/brevo";
 import nodemailer from "nodemailer";
 
-const { RESEND_API_KEY, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_SECURE, EMAIL_FROM } = process.env;
+const { BREVO_API_KEY, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_SECURE, EMAIL_FROM } = process.env;
 
 // O `fromService`/`property: host` do Render devolve só o slug do serviço
 // (ex. "bolao-web-d8bw"), sem o domínio ".onrender.com" — sem isso os links
@@ -10,15 +10,20 @@ const rawAppUrl = process.env.APP_URL || "http://localhost:5173";
 const appOrigin = rawAppUrl.startsWith("http")
   ? rawAppUrl
   : `https://${rawAppUrl.includes(".") ? rawAppUrl : `${rawAppUrl}.onrender.com`}`;
-// "bolao.local" não é um domínio real — nunca passaria a verificação de
-// domínio do Resend. Sem EMAIL_FROM configurado, cai no sender de teste do
-// Resend (funciona sem verificar domínio, mas só é indicado para teste —
-// ver docs/DEPLOY.md). SMTP genérico não tem essa restrição.
+
 // "||" (não "??") de propósito — docker-compose resolve env var vazia como
 // string vazia, não undefined, e isso também deve cair no padrão.
-const from = EMAIL_FROM || (RESEND_API_KEY ? "Bolão Copa AMM <onboarding@resend.dev>" : "Bolão Copa AMM <no-reply@bolao.local>");
+const rawFrom = EMAIL_FROM || "Bolão Copa AMM <no-reply@bolao.local>";
 
-const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
+/** "Nome <email>" -> {name, email} — Brevo pede os dois campos separados. */
+function parseFrom(raw: string): { name: string; email: string } {
+  const match = raw.match(/^(.*)<(.+)>$/);
+  if (match) return { name: match[1].trim() || "Bolão Copa AMM", email: match[2].trim() };
+  return { name: "Bolão Copa AMM", email: raw.trim() };
+}
+const from = parseFrom(rawFrom);
+
+const brevo = BREVO_API_KEY ? new BrevoClient({ apiKey: BREVO_API_KEY }) : null;
 
 const smtpTransporter = SMTP_HOST
   ? nodemailer.createTransport({
@@ -38,19 +43,29 @@ export function loginUrl(token: string): string {
 }
 
 /**
- * Ordem de preferência: Resend (API própria, `RESEND_API_KEY`) → SMTP
- * genérico (`SMTP_HOST`, qualquer provedor: Brevo, Mailtrap, o próprio Resend
- * via SMTP, etc.) → console (dev/local, sem credenciais). Ver docs/DEPLOY.md.
+ * Ordem de preferência: Brevo (API própria, `BREVO_API_KEY`) → SMTP genérico
+ * (`SMTP_HOST`, qualquer provedor: o próprio Brevo via SMTP, Mailtrap, etc.)
+ * → console (dev/local, sem credenciais). Ver docs/DEPLOY.md.
+ *
+ * Brevo exige um remetente verificado (aba "Senders & IPs" — pode ser um
+ * e-mail pessoal confirmado por clique, não precisa de domínio inteiro).
+ * Configure EMAIL_FROM com esse endereço; sem isso o envio falha com erro
+ * "sender not valid" — ver docs/DEPLOY.md.
  */
 async function sendEmail(to: string, subject: string, text: string, html: string): Promise<void> {
-  if (resend) {
-    const { error } = await resend.emails.send({ from, to, subject, text, html });
-    if (error) throw new Error(`Resend falhou: ${error.message}`);
+  if (brevo) {
+    await brevo.transactionalEmails.sendTransacEmail({
+      sender: from,
+      to: [{ email: to }],
+      subject,
+      textContent: text,
+      htmlContent: html,
+    });
     return;
   }
 
   if (smtpTransporter) {
-    await smtpTransporter.sendMail({ from, to, subject, text, html });
+    await smtpTransporter.sendMail({ from: `${from.name} <${from.email}>`, to, subject, text, html });
     return;
   }
 
