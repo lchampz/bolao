@@ -16,7 +16,7 @@ export function CircularProgress({ value, total }: { value: number; total: numbe
             cy="50"
             fill="none"
             r={RADIUS}
-            stroke="#65df76"
+            stroke="#65a5df"
             strokeDasharray={CIRCUMFERENCE}
             strokeDashoffset={offset}
             strokeLinecap="round"

@@ -7,8 +7,8 @@
 body {
   background-color: theme("colors.background");
   color: theme("colors.on-background");
-  background-image: radial-gradient(circle at top right, rgba(101, 223, 118, 0.05), transparent 40%),
-    radial-gradient(circle at bottom left, rgba(35, 166, 70, 0.05), transparent 40%);
+  background-image: radial-gradient(circle at top right, rgba(101, 165, 223, 0.05), transparent 40%),
+    radial-gradient(circle at bottom left, rgba(35, 87, 166, 0.05), transparent 40%);
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -37,7 +37,7 @@ body {
 
 .glass-card-floating:hover {
   transform: translateY(-4px);
-  box-shadow: 0 15px 40px -15px rgba(101, 223, 118, 0.2);
+  box-shadow: 0 15px 40px -15px rgba(101, 165, 223, 0.2);
 }
 
 .glow-green {
@@ -49,12 +49,12 @@ body {
 }
 
 .glow-button {
-  box-shadow: 0 0 15px rgba(101, 223, 118, 0.3);
+  box-shadow: 0 0 15px rgba(101, 165, 223, 0.3);
   transition: all 0.3s ease;
 }
 
 .glow-button:hover {
-  box-shadow: 0 0 25px rgba(101, 223, 118, 0.6);
+  box-shadow: 0 0 25px rgba(101, 165, 223, 0.6);
   transform: scale(1.02);
 }
 
@@ -97,8 +97,8 @@ body {
 
 .score-input:focus {
   outline: none;
-  border-color: #65df76;
-  box-shadow: 0 0 10px rgba(101, 223, 118, 0.2);
+  border-color: #65a5df;
+  box-shadow: 0 0 10px rgba(101, 165, 223, 0.2);
   background: rgba(0, 0, 0, 0.5);
 }
 
@@ -118,7 +118,7 @@ body {
   transform: translate(-50%, -50%);
   width: 150%;
   height: 150%;
-  background: radial-gradient(circle, rgba(101, 223, 118, 0.15) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(101, 165, 223, 0.15) 0%, transparent 60%);
   z-index: -1;
   pointer-events: none;
 }

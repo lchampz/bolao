@@ -44,7 +44,7 @@ function SideNav() {
             to={item.to}
             end={item.to === "/"}
             className={({ isActive }) =>
-              `flex items-center px-4 py-3 rounded-lg transition-all duration-300 active:scale-95 hover:shadow-[0_0_15px_rgba(101,223,118,0.3)] group ${
+              `flex items-center px-4 py-3 rounded-lg transition-all duration-300 active:scale-95 hover:shadow-[0_0_15px_rgba(101,165,223,0.3)] group ${
                 isActive
                   ? "bg-primary/20 text-primary border-r-4 border-primary font-bold"
                   : "text-on-surface-variant/70 hover:text-on-surface hover:bg-white/5"

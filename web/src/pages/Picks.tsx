@@ -111,7 +111,7 @@ export default function Picks() {
                     <span className="font-label-md text-label-md text-xs">Prazo encerrado</span>
                   </div>
                 ) : existing ? (
-                  <div className="bg-primary-container/20 text-primary border border-primary/50 px-3 py-1 rounded-full flex items-center space-x-1 shadow-[0_0_10px_rgba(101,223,118,0.2)]">
+                  <div className="bg-primary-container/20 text-primary border border-primary/50 px-3 py-1 rounded-full flex items-center space-x-1 shadow-[0_0_10px_rgba(101,165,223,0.2)]">
                     <span className="material-symbols-outlined icon-filled text-[16px]">check_circle</span>
                     <span className="font-label-md text-label-md text-xs font-bold">Enviado</span>
                   </div>

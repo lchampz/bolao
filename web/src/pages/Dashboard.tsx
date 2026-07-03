@@ -60,7 +60,7 @@ export default function Dashboard() {
     {
       icon: "shield",
       label: "Invicto",
-      color: "#65df76",
+      color: "#65a5df",
       active: (myEntry?.streakPoints ?? 0) > 0,
       tooltip: "Conquistou uma sequência de 3 acertos consecutivos (placar exato ou vencedor).",
     },
