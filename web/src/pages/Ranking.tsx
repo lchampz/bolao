@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../api";
 import { Avatar } from "../components/Avatar";
+import { Modal } from "../components/Modal";
 import { AREA_LABELS, type Prize, type RankingEntry } from "../types";
 
 const AREA_CHIP: Record<string, string> = {
@@ -17,13 +18,24 @@ const CRITERIA = [
   { icon: "timer", iconColor: "text-tertiary-fixed", title: "Velocidade do Palpite", desc: "Quem enviou o palpite primeiro para o sistema." },
 ];
 
+// Espelha as constantes de server/src/scoring.ts — só para exibição no
+// modal de regras, não recalcula pontuação (isso é feito no backend).
+const PHASE_CAPS = { OITAVAS: 3, QUARTAS: 4, SEMIFINAL: 5 };
+const CHAMPION_BONUS = 6;
+const ROUND_HIGH_SCORE_BONUS = 2;
+const STREAK_BONUS = 2;
+const STREAK_LENGTH = 3;
+
 export default function Ranking() {
   const [ranking, setRanking] = useState<RankingEntry[]>([]);
   const [prizes, setPrizes] = useState<Prize[]>([]);
+  const [antecedenciaMinutos, setAntecedenciaMinutos] = useState(120);
+  const [rulesOpen, setRulesOpen] = useState(false);
 
   useEffect(() => {
     api.getRanking().then(setRanking);
     api.getPrizes().then(setPrizes);
+    api.getConfig().then((c) => setAntecedenciaMinutos(c.antecedenciaMinutos));
   }, []);
 
   const top3 = ranking.slice(0, 3);
@@ -80,7 +92,10 @@ export default function Ranking() {
         <section className="glass-card rounded-xl overflow-hidden flex flex-col">
           <div className="p-6 border-b border-white/10 flex justify-between items-center bg-surface-container/50">
             <h3 className="font-headline-md text-headline-md font-bold text-white m-0">Classificação Geral</h3>
-            <button className="text-sm font-bold text-primary hover:text-primary-fixed transition-colors flex items-center gap-1">
+            <button
+              onClick={() => setRulesOpen(true)}
+              className="text-sm font-bold text-primary hover:text-primary-fixed transition-colors flex items-center gap-1"
+            >
               Ver Regras <span className="material-symbols-outlined text-sm">open_in_new</span>
             </button>
           </div>
@@ -175,6 +190,66 @@ export default function Ranking() {
           </div>
         </aside>
       </div>
+
+      <Modal open={rulesOpen} onClose={() => setRulesOpen(false)} title="🏆 Como funciona a pontuação">
+        <div className="space-y-5 text-sm text-on-surface-variant">
+          <section>
+            <h4 className="text-white font-bold mb-2">Por palpite</h4>
+            <ul className="space-y-1">
+              <li>
+                <span className="text-primary font-bold">+3</span> — placar exato
+              </li>
+              <li>
+                <span className="text-primary font-bold">+2</span> — só o vencedor certo (placar errado)
+              </li>
+              <li>
+                <span className="text-on-surface-variant/60 font-bold">0</span> — errou o vencedor
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h4 className="text-white font-bold mb-2">Bônus</h4>
+            <ul className="space-y-2">
+              <li>
+                <span className="text-primary font-bold">+1</span> por classificado certo em cada fase, até um teto —
+                Oitavas ({PHASE_CAPS.OITAVAS}), Quartas ({PHASE_CAPS.QUARTAS}), Semifinal ({PHASE_CAPS.SEMIFINAL}).
+              </li>
+              <li>
+                <span className="text-primary font-bold">+{CHAMPION_BONUS}</span> — acertar o campeão da Copa (o
+                vencedor da Final).
+              </li>
+              <li>
+                <span className="text-primary font-bold">+1</span> por palpite enviado com pelo menos{" "}
+                <strong className="text-white">{antecedenciaMinutos} minutos</strong> de antecedência do jogo
+                ("Madrugador").
+              </li>
+              <li>
+                <span className="text-primary font-bold">+{STREAK_BONUS}</span> a cada {STREAK_LENGTH} acertos de
+                vencedor consecutivos (na ordem dos jogos) — quebra a sequência no primeiro erro.
+              </li>
+              <li>
+                <span className="text-primary font-bold">+{ROUND_HIGH_SCORE_BONUS}</span> para quem fizer a maior
+                pontuação da rodada, quando todos os jogos dela já tiverem resultado (todos os empatados no topo
+                recebem).
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h4 className="text-white font-bold mb-2">Critérios de desempate</h4>
+            <p className="mb-2">Em ordem, até desempatar:</p>
+            <ol className="list-decimal list-inside space-y-1">
+              <li>Total de pontos</li>
+              <li>Mais placares exatos</li>
+              <li>Mais acertos de vencedor</li>
+              <li>Acertou o campeão</li>
+              <li>Mais pontos de bônus de fase</li>
+              <li>Quem enviou o palpite primeiro</li>
+            </ol>
+          </section>
+        </div>
+      </Modal>
     </div>
   );
 }
