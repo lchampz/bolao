@@ -37,9 +37,13 @@ app.use("/api", participantsRouter);
 app.use("/api", invitesRouter);
 app.use("/api", loginRouter);
 app.use("/api", picksRouter);
-app.use("/api", adminRouter);
 app.use("/api", rankingRouter);
 app.use("/api", prizesRouter);
+// adminRouter tem que ser o último — seu `.use(requireAdmin)` não tem path
+// restrito, então intercepta QUALQUER request que chegue até ele. Montado
+// antes de ranking/prizes, ele derrubava essas rotas públicas com 401 antes
+// de elas serem alcançadas.
+app.use("/api", adminRouter);
 
 app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
   console.error(err);
