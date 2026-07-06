@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { api } from "../api";
 import { Avatar } from "../components/Avatar";
 import { HexBadge } from "../components/HexBadge";
+import { PointsBreakdown } from "../components/PointsBreakdown";
 import { Tooltip } from "../components/Tooltip";
 import { useCountdown } from "../hooks/useCountdown";
 import { useParticipant } from "../context/ParticipantContext";
@@ -206,7 +207,13 @@ export default function Dashboard() {
                   <span className="font-label-md text-label-md text-on-surface font-bold truncate w-full text-center">
                     {entry.participant.name}
                   </span>
-                  <span className="font-label-md text-[12px] text-on-surface-variant">{entry.total} pts</span>
+                  <Tooltip
+                    className="inline-flex cursor-help"
+                    panelClassName="w-56 text-left"
+                    label={<PointsBreakdown entry={entry} />}
+                  >
+                    <span className="font-label-md text-[12px] text-on-surface-variant">{entry.total} pts</span>
+                  </Tooltip>
                   <div
                     className={`w-full ${heightClass} bg-gradient-to-t from-surface-container-highest to-surface-container border-t rounded-t-lg mt-2 flex justify-center pt-2`}
                     style={{ borderColor: `${color}80` }}
