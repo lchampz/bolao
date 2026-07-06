@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../api";
 import { Avatar } from "../components/Avatar";
 import { Modal } from "../components/Modal";
+import { Tooltip } from "../components/Tooltip";
 import { AREA_LABELS, type Prize, type RankingEntry } from "../types";
 
 const AREA_CHIP: Record<string, string> = {
@@ -136,7 +137,48 @@ export default function Ranking() {
                         <span className="font-bold text-xs">{entry.streakPoints > 0 ? entry.streakPoints : "-"}</span>
                       </div>
                     </td>
-                    <td className="p-4 text-right font-stats-xl text-xl text-primary font-black">{entry.total}</td>
+                    <td className="p-4 text-right font-stats-xl text-xl text-primary font-black">
+                      <Tooltip
+                        className="inline-flex justify-end cursor-help"
+                        panelClassName="w-56 text-left"
+                        placement="bottom"
+                        align="right"
+                        label={
+                          <div className="space-y-1 font-label-md normal-case font-normal">
+                            <div className="flex justify-between gap-3">
+                              <span>Jogos</span>
+                              <span className="font-bold">{entry.gamePoints}</span>
+                            </div>
+                            <div className="flex justify-between gap-3">
+                              <span>Bônus de fase</span>
+                              <span className="font-bold">{entry.phaseBonusPoints}</span>
+                            </div>
+                            <div className="flex justify-between gap-3">
+                              <span>Campeão</span>
+                              <span className="font-bold">{entry.championBonusPoints}</span>
+                            </div>
+                            <div className="flex justify-between gap-3">
+                              <span>Madrugador</span>
+                              <span className="font-bold">{entry.earlyBirdPoints}</span>
+                            </div>
+                            <div className="flex justify-between gap-3">
+                              <span>Sequência</span>
+                              <span className="font-bold">{entry.streakPoints}</span>
+                            </div>
+                            <div className="flex justify-between gap-3">
+                              <span>Rodada</span>
+                              <span className="font-bold">{entry.roundHighScorePoints}</span>
+                            </div>
+                            <div className="flex justify-between gap-3 pt-1 border-t border-white/10">
+                              <span>Total</span>
+                              <span className="font-bold text-primary">{entry.total}</span>
+                            </div>
+                          </div>
+                        }
+                      >
+                        {entry.total}
+                      </Tooltip>
+                    </td>
                   </tr>
                 ))}
                 {ranking.length === 0 && (
